@@ -12,6 +12,8 @@ import ServiceDetail from './pages/servicedetailpage/ServiceDetail';
 import Clients from './pages/clientspage/Clients';
 import Career from './pages/careerpage/Career';
 import PricingPage from './components/ui/AnimatedPricingPage';
+import DigitalMarketing from './pages/digitalmarketingpage/DigitalMarketing';
+import DMServiceDetail from './pages/digitalmarketingpage/DMServiceDetail';
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="/services/:id" element={<ServiceDetail />} />
           <Route path="/hr-services" element={<HRServices />} />
           <Route path="/hr-services/:id" element={<HRServiceDetail />} />
+          <Route path="/dm-services" element={<DigitalMarketing />} />
+          <Route path="/dm-services/:id" element={<DMServiceDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/technologies" element={<Technologies />} />
           <Route path="/clients" element={<Clients />} />

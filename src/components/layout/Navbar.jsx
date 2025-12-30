@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
-    Menu, X, ChevronDown, Instagram, Facebook, Twitter
+    Menu, X, ChevronDown, Instagram, Facebook
 } from 'lucide-react';
 import {
     RiCodeBoxFill, RiSmartphoneFill, RiPaletteFill, RiCloudWindyFill,
@@ -10,13 +10,14 @@ import {
     RiLineChartFill, RiUserStarFill, RiHandCoinFill, RiArrowRightUpLine,
     RiShareForwardFill, RiMailSendFill, RiAdvertisementFill, RiArticleFill,
     RiPresentationFill, RiTeamFill, RiChatSmileFill,
-    RiUserAddFill, RiSearchFill, RiLayoutGridFill, RiMovieFill, RiBarChartGroupedFill
+    RiUserAddFill, RiSearchFill, RiLayoutGridFill, RiMovieFill, RiBarChartGroupedFill,
+    RiTwitterXFill
 } from 'react-icons/ri';
 import { cn } from '../../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '../../assets/infolexus_logo_transparent.png';
+import logo from '../../assets/lnfolexus_4k_WALLPAPER_WITHOUT_CAPTION___1_-removebg-preview.png';
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -86,14 +87,14 @@ const Navbar = () => {
             {
                 title: 'Digital Marketing',
                 items: [
-                    { name: 'Social Media Marketing', icon: RiShareForwardFill, path: '/services/dm-11' },
-                    { name: 'SEO', icon: RiSearchFill, path: '/services/dm-11' },
-                    { name: 'Google & Social Ads', icon: RiAdvertisementFill, path: '/services/dm-11' },
-                    { name: 'Content Marketing', icon: RiArticleFill, path: '/services/dm-11' },
-                    { name: 'Email Marketing', icon: RiMailSendFill, path: '/services/dm-11' },
-                    { name: 'Web Optimization', icon: RiLayoutGridFill, path: '/services/dm-11' },
-                    { name: 'Analytics & Reporting', icon: RiLineChartFill, path: '/services/dm-11' },
-                    { name: 'Video Shoots & Editing', icon: RiMovieFill, path: '/services/dm-11' },
+                    { name: 'Social Media Marketing', icon: RiShareForwardFill, path: '/dm-services#smm' },
+                    { name: 'SEO', icon: RiSearchFill, path: '/dm-services#seo' },
+                    { name: 'Google & Social Ads', icon: RiAdvertisementFill, path: '/dm-services#ppc' },
+                    { name: 'Content Marketing', icon: RiArticleFill, path: '/dm-services#content' },
+                    { name: 'Email Marketing', icon: RiMailSendFill, path: '/dm-services#email' },
+                    { name: 'Web Optimization', icon: RiLayoutGridFill, path: '/dm-services#web-optimization' },
+                    { name: 'Analytics & Reporting', icon: RiLineChartFill, path: '/dm-services#analytics' },
+                    { name: 'Video Shoots & Editing', icon: RiMovieFill, path: '/dm-services#video' },
                 ]
             },
             {
@@ -139,11 +140,11 @@ const Navbar = () => {
 
                 {/* Logo */}
                 <Link to="/" className="flex items-center shrink-0 z-[90]">
-                    <img src={logo} alt="Infolexus" className="h-8 md:h-12 w-auto transition-all duration-300 object-contain" />
+                    <img src={logo} alt="Infolexus" className="h-8 md:h-10 w-auto transition-all duration-300 object-contain object-left" />
                 </Link>
 
                 {/* Desktop Nav - Centered Absolute */}
-                <div className="hidden md:flex items-center justify-center gap-8 lg:gap-10 absolute left-0 top-0 w-full h-full pointer-events-none">
+                <div className="hidden lg:flex items-center justify-center gap-8 lg:gap-10 absolute left-0 top-0 w-full h-full pointer-events-none">
                     {navLinks.map((link) => (
                         <div
                             key={link.name}
@@ -233,7 +234,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Right CTA */}
-                <div className="hidden md:flex items-center gap-6">
+                <div className="hidden lg:flex items-center gap-6">
                     <SocialIcons />
                     <Link to="/contact"
                         className="px-6 py-2 border border-white rounded-full text-xs font-bold text-white hover:bg-white hover:text-black transition-all duration-300">
@@ -244,7 +245,7 @@ const Navbar = () => {
                 {/* Mobile Button - NOW INSIDE FLEX CONTAINER */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden text-white p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 shadow-lg hover:bg-white/20 transition-all"
+                    className="lg:hidden text-white p-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10 shadow-lg hover:bg-white/20 transition-all"
                     aria-label="Toggle Menu"
                 >
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -261,7 +262,7 @@ const Navbar = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-black/60 z-[90] md:hidden backdrop-blur-sm"
+                            className="fixed inset-0 bg-black/60 z-[90] lg:hidden backdrop-blur-sm"
                         />
 
                         {/* Drawer */}
@@ -270,7 +271,7 @@ const Navbar = () => {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                            className="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-[#030B25] z-[100] flex flex-col md:hidden shadow-2xl border-l border-white/10 overflow-y-auto"
+                            className="fixed top-0 right-0 h-full w-[85%] max-w-[320px] bg-[#030B25] z-[100] flex flex-col lg:hidden shadow-2xl border-l border-white/10 overflow-y-auto"
                         >
                             {/* Mobile Header */}
                             <div className="flex justify-between items-center p-6 bg-[#030B25] sticky top-0 z-20">
@@ -387,12 +388,11 @@ const MegaMenuCard = ({ item }) => (
     </MotionLink>
 );
 
-// Helper for Social Icons
 const SocialIcons = ({ mobile }) => (
     <>
-        <a href="#" className="text-white hover:text-cyan-400 transition-colors"><Instagram size={mobile ? 20 : 18} /></a>
-        <a href="#" className="text-white hover:text-cyan-400 transition-colors"><Facebook size={mobile ? 20 : 18} /></a>
-        <a href="#" className="text-white hover:text-cyan-400 transition-colors"><Twitter size={mobile ? 20 : 18} /></a>
+        <a href="https://www.instagram.com/infolexus_solutions?igsh=MWxmOXFpanBseTJ2bA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-white hover:text-cyan-400 transition-colors"><Instagram size={mobile ? 20 : 18} /></a>
+        <a href="https://www.facebook.com/share/1DZN16dGP2/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-white hover:text-cyan-400 transition-colors"><Facebook size={mobile ? 20 : 18} /></a>
+        <a href="https://x.com/InfolexusOff" target="_blank" rel="noopener noreferrer" className="text-white hover:text-cyan-400 transition-colors"><RiTwitterXFill size={mobile ? 20 : 18} /></a>
     </>
 );
 

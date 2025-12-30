@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const HRServiceSection = ({ title, subtitle, items, id, bgColor = "bg-white", onEnquire, actionLabel = "Learn More" }) => (
+const DMServiceSection = ({ title, subtitle, items, id, bgColor = "bg-white" }) => (
     <section id={id} className={`py-24 ${bgColor} overflow-hidden`}>
         <div className="container mx-auto px-6 md:px-12">
             <motion.div
@@ -37,20 +37,32 @@ const HRServiceSection = ({ title, subtitle, items, id, bgColor = "bg-white", on
                                 <img
                                     src={item.image}
                                     alt={item.title}
-                                    className="w-full h-auto max-w-md md:max-w-lg object-contain relative z-10"
+                                    className="w-full h-auto max-w-md md:max-w-lg object-contain relative z-10 rounded-xl shadow-lg"
                                 />
                             </motion.div>
                         </div>
                         <div className="lg:w-1/2 w-full">
-                            <h3 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">{item.title}</h3>
-                            <p className="text-lg text-slate-600 leading-relaxed whitespace-pre-line text-justify mb-8">{item.description}</p>
+                            <h3 className="text-3xl md:text-3xl font-bold text-slate-800 mb-4">{item.title}</h3>
+                            <p className="text-lg text-slate-600 leading-relaxed whitespace-pre-line text-justify mb-6">{item.description}</p>
 
-                            <button
-                                onClick={() => onEnquire && onEnquire(item)}
-                                className="inline-flex items-center text-blue-600 font-bold hover:text-blue-800 transition-colors uppercase tracking-wider text-sm group"
+                            {/* Features List */}
+                            {item.features && (
+                                <ul className="space-y-3 mb-8">
+                                    {item.features.slice(0, 5).map((feature, idx) => (
+                                        <li key={idx} className="flex items-start text-slate-700">
+                                            <span className="mr-3 text-blue-500 mt-1">✔</span>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+
+                            <Link
+                                to={`/dm-services/${item.id}`}
+                                className="inline-flex items-center text-white bg-blue-600 px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition-colors uppercase tracking-wider text-sm group shadow-lg hover:shadow-blue-500/30"
                             >
-                                {actionLabel} <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
-                            </button>
+                                Explore Service <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                            </Link>
                         </div>
                     </motion.div>
                 ))}
@@ -59,4 +71,4 @@ const HRServiceSection = ({ title, subtitle, items, id, bgColor = "bg-white", on
     </section>
 );
 
-export default HRServiceSection;
+export default DMServiceSection;

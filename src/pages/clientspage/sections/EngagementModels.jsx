@@ -13,10 +13,10 @@ const EngagementModels = () => {
             features: ["Rapid Prototyping", "Core Feature Focus", "User-Centric UI/UX", "Launch-Ready Code"]
         },
         {
-            title: "Scale-Up Squad",
+            title: "Dedicated Innovation Team",
             icon: Repeat,
-            description: "Post-revenue? We integrate with your core team to accelerate feature development, optimize performance, and handle technical debt.",
-            features: ["Dedicated Developers", "Agile Sprints", "CI/CD Setup", "Performance Tuning"]
+            description: "An extension of your in-house team. We provide a full squad of engineers, designers, and product managers fully dedicated to your long-term success.",
+            features: ["Full Lifecycle Management", "Scalable Resources", "Knowledge Retention", "Seamless Integration"]
         },
         {
             title: "CTO on Demand",

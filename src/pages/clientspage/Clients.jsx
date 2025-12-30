@@ -3,8 +3,8 @@ import ClientsHero from './sections/ClientsHero';
 import ClientsProjectShowcase from './sections/ClientsProjectShowcase';
 import ClientImpact from './sections/ClientImpact';
 import EngagementModels from './sections/EngagementModels';
-import GlobalFootprint from './sections/GlobalFootprint';
-import IndustryFocus from './sections/IndustryFocus';
+
+import MarketsWeServe from './sections/MarketsWeServe';
 
 const Clients = () => {
     useEffect(() => {
@@ -12,13 +12,15 @@ const Clients = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-brand-dark overflow-x-hidden">
+        <div className="pt-20 font-sans bg-slate-50 min-h-screen">
             <ClientsHero />
-            <ClientImpact />
+             <ClientImpact />
+            
             <ClientsProjectShowcase />
+           
+           
             <EngagementModels />
-            <GlobalFootprint />
-            <IndustryFocus />
+             <MarketsWeServe />
         </div>
     );
 };

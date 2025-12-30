@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HRHero from './sections/HRHero';
 import HRServiceSection from './sections/HRServiceSection';
+import HRInquiryModal from './components/HRInquiryModal';
 
 // Importing images downloaded from the reference site (Update paths to be relative to this file's location if needed, using ../../../assets)
 import service1 from '../../assets/hr-services/service-1.webp';
@@ -14,6 +15,16 @@ import service8 from '../../assets/hr-services/service-8.webp';
 import service9 from '../../assets/hr-services/service-9.webp';
 
 const HRServices = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalCategory, setModalCategory] = useState('Job Seeker');
+    const [modalSubject, setModalSubject] = useState('');
+
+    const openModal = (category, item) => {
+        setModalCategory(category);
+        setModalSubject(item ? item.title : '');
+        setIsModalOpen(true);
+    };
+
     const companiesData = [
         {
             id: 'hr-recruitment',
@@ -96,6 +107,8 @@ const HRServices = () => {
                 title="COMPANIES"
                 subtitle="Empower Your Business with the Right Talent"
                 items={companiesData}
+                actionLabel="Enquire Now"
+                onEnquire={(item) => openModal('Company', item)}
             />
 
             <HRServiceSection
@@ -104,6 +117,8 @@ const HRServices = () => {
                 subtitle="Bridging the Gap Between Education & Employment"
                 items={collegesData}
                 bgColor="bg-slate-50"
+                actionLabel="Partner With Us"
+                onEnquire={(item) => openModal('College', item)}
             />
 
             <HRServiceSection
@@ -111,6 +126,15 @@ const HRServices = () => {
                 title="JOB SEEKERS"
                 subtitle="Your Path to a Successful Career Starts Here"
                 items={jobSeekersData}
+                actionLabel="Apply Now"
+                onEnquire={(item) => openModal('Job Seeker', item)}
+            />
+
+            <HRInquiryModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                initialCategory={modalCategory}
+                initialSubject={modalSubject}
             />
         </div>
     );

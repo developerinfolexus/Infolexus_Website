@@ -33,12 +33,7 @@ const ServiceHero = ({ service, id }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="flex justify-start mb-8">
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-600/20 border border-violet-500/30 text-violet-300 text-xs font-bold tracking-[0.2em] uppercase backdrop-blur-md shadow-lg shadow-violet-500/10">
-                            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse"></span>
-                            Service Protocol // {id.toUpperCase()}
-                        </span>
-                    </div>
+
 
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-snug tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400 pb-2">
                         {service.title}

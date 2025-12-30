@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
-import footerLogo from '../../assets/infolexus_logo_transparent.png';
+import { Facebook, Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { RiTwitterXFill } from 'react-icons/ri';
+import footerLogo from '../../assets/lnfolexus_4k_WALLPAPER_WITHOUT_CAPTION___1_-removebg-preview.png';
 
 const Footer = () => {
     return (
@@ -17,22 +18,22 @@ const Footer = () => {
                     <div className="space-y-6">
                         <Link to="/" className="inline-block">
                             {/* Using text fallback if image is missing, but prefer image if available */}
-                            <img src={footerLogo} alt="Infolexus" className="h-10 w-auto brightness-200" />
+                            <img src={footerLogo} alt="Infolexus" className="h-8 md:h-10 w-auto brightness-200 object-contain object-left" />
                         </Link>
                         <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
                             Empowering businesses through cutting-edge technology and strategic human capital solutions. Your partner in digital transformation and workforce excellence.
                         </p>
                         <div className="flex gap-4">
                             {[
-                                { icon: Linkedin, href: "#" },
-                                { icon: Twitter, href: "#" },
-                                { icon: Facebook, href: "#" },
-                                { icon: Instagram, href: "#" }
+                                { icon: Linkedin, href: "https://www.linkedin.com/company/infolexus-solutions/", color: "bg-[#0077b5]", hoverColor: "hover:bg-[#0077b5]" },
+                                { icon: RiTwitterXFill, href: "https://x.com/InfolexusOff", color: "bg-black", hoverColor: "hover:bg-black" },
+                                { icon: Facebook, href: "https://www.facebook.com/share/1DZN16dGP2/?mibextid=wwXIfr", color: "bg-[#1877F2]", hoverColor: "hover:bg-[#1877F2]" },
+                                { icon: Instagram, href: "https://www.instagram.com/infolexus_solutions?igsh=MWxmOXFpanBseTJ2bA%3D%3D&utm_source=qr", color: "bg-gradient-to-br from-[#f09433] to-[#bc1888]", hoverColor: "hover:from-[#f09433] hover:to-[#bc1888]" }
                             ].map((social, idx) => (
                                 <a
                                     key={idx}
                                     href={social.href}
-                                    className="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300 hover:scale-110"
+                                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg ${social.color} border border-white/10`}
                                 >
                                     <social.icon size={18} />
                                 </a>
@@ -40,31 +41,16 @@ const Footer = () => {
                         </div>
                     </div>
 
-                    {/* Map Integration */}
-                    <div className="lg:col-span-1">
-                        <h4 className="text-white font-bold text-lg mb-6 tracking-wide">Our Location</h4>
-                        <div className="w-full h-64 md:h-48 rounded-lg overflow-hidden border border-slate-800 relative group shadow-lg shadow-cyan-900/20">
-                            <iframe
-                                title="Office Location"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.347263595567!2d76.9889976757065!3d11.006997092116035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859eb03584a43%3A0x32befeb42d4f385a!2sInfolexus%20Solutions!5e0!3m2!1sen!2sin!4v1713437292323!5m2!1sen!2sin"
-                                className="w-full h-full hover:scale-105 transition-transform duration-700"
-                                allowFullScreen=""
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                            ></iframe>
-                        </div>
-                    </div>
-
-                    {/* Quick Links */}
+                    {/* Quick Links (Company) */}
                     <div>
                         <h4 className="text-white font-bold text-lg mb-6 tracking-wide">Company</h4>
                         <ul className="space-y-3">
                             {[
                                 { name: 'Home', path: '/' },
-                                { name: 'About Us', path: '/about' },
-                                { name: 'Why Choose Us', path: '/about' },
-                                { name: 'Our Team', path: '/about' },
-                                { name: 'Careers', path: '/careers' }
+                                { name: 'About', path: '/about' },
+                                { name: 'Technologies', path: '/technologies' },
+                                { name: 'Clients', path: '/clients' },
+                                { name: 'Career', path: '/careers' }
                             ].map((link) => (
                                 <li key={link.name}>
                                     <Link to={link.path} className="text-slate-400 hover:text-cyan-400 transition-colors flex items-center gap-1 group">
@@ -76,7 +62,7 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Newsletter & Contact */}
+                    {/* Newsletter & Contact (Stay Connected) */}
                     <div>
                         <h4 className="text-white font-bold text-lg mb-6 tracking-wide">Stay Connected</h4>
                         <p className="text-slate-400 text-sm mb-4">Subscribe to our newsletter for the latest tech trends and insights.</p>
@@ -100,6 +86,21 @@ const Footer = () => {
                                 <Mail size={18} className="text-cyan-500 group-hover:text-cyan-400" />
                                 <span className="group-hover:text-slate-200 transition-colors">info@infolexus.com</span>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Map Integration (Our Location) */}
+                    <div className="lg:col-span-1">
+                        <h4 className="text-white font-bold text-lg mb-6 tracking-wide">Our Location</h4>
+                        <div className="w-full h-64 md:h-48 rounded-lg overflow-hidden border border-slate-800 relative group shadow-lg shadow-cyan-900/20">
+                            <iframe
+                                title="Office Location"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.347263595567!2d76.9889976757065!3d11.006997092116035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859eb03584a43!2sInfolexus%20Solutions!5e0!3m2!1sen!2sin!4v1713437292323!5m2!1sen!2sin"
+                                className="w-full h-full hover:scale-105 transition-transform duration-700"
+                                allowFullScreen=""
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                            ></iframe>
                         </div>
                     </div>
 

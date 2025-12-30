@@ -5,7 +5,7 @@ import executionIcon from "../../../assets/process-icons/build_3d.png";
 import testingIcon from "../../../assets/process-icons/testing_3d.png";
 import deliveryIcon from "../../../assets/process-icons/delivery.png";
 import supportIcon from "../../../assets/support-neon.png";
-import companyLogo from "../../../assets/infolexus_logo-removebg-preview.png";
+import companyLogo from "../../../assets/lnfolexus_4k_WALLPAPER_WITHOUT_CAPTION___1_-removebg-preview.png";
 
 // --- STEPS DATA ---
 // Full Layout: 360 deg distribution.
@@ -168,7 +168,7 @@ export default function ProcessSection() {
                             <img
                                 src={companyLogo}
                                 alt="Infolexus"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-contain object-center p-2"
                             />
                         </div>
 

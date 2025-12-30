@@ -13,7 +13,7 @@ import InfrastructureAndCloud from './services/InfrastructureAndCloud';
 import TestingAndQA from './services/TestingAndQA';
 import WebDevelopment from './services/WebDevelopment';
 import ITSupport from './services/ITSupport';
-import DigitalMarketing from './services/DigitalMarketing';
+import CyberSecurity from './services/CyberSecurity';
 
 const ServiceDetail = () => {
     const { id } = useParams();
@@ -30,7 +30,7 @@ const ServiceDetail = () => {
         'qa-08': TestingAndQA,
         'wd-09': WebDevelopment,
         'it-10': ITSupport,
-        'dm-11': DigitalMarketing
+        'security': CyberSecurity
     };
 
     const SpecificComponent = ServiceComponents[id];

@@ -19,7 +19,8 @@ import {
     SiTableau, SiLooker, SiSnowflake, SiPandas,
     SiSelenium, SiCypress, SiJest, SiPostman, SiApachejmeter,
     SiJira, SiCisco,
-    SiGoogleanalytics, SiSemrush, SiHubspot, SiMeta, SiGoogleads, SiMailchimp
+    SiGoogleanalytics, SiSemrush, SiHubspot, SiMeta, SiGoogleads, SiMailchimp,
+    SiSplunk, SiWireshark, SiBurpsuite
 } from 'react-icons/si';
 import { FaAws, FaJava, FaWindows } from 'react-icons/fa';
 import { VscAzure } from 'react-icons/vsc';
@@ -109,7 +110,15 @@ const techMap = {
     "HubSpot": { icon: SiHubspot, color: "text-[#FF7A59]" },
     "Meta Ads": { icon: SiMeta, color: "text-[#0668E1]" },
     "Google Ads": { icon: SiGoogleads, color: "text-[#4285F4]" },
-    "Mailchimp": { icon: SiMailchimp, color: "text-[#FFE01B]" }
+    "Mailchimp": { icon: SiMailchimp, color: "text-[#FFE01B]" },
+
+    // Security (Added)
+    "Splunk": { icon: SiSplunk, color: "text-[#000000]" },
+    "CrowdStrike": { icon: Shield, color: "text-[#FC0000]" }, // Fallback to Shield
+    "Wireshark": { icon: SiWireshark, color: "text-[#1679A7]" },
+    "Nessus": { icon: Shield, color: "text-[#0078D4]" }, // Using Shield as generic secure icon
+    "Burp Suite": { icon: SiBurpsuite, color: "text-[#FF6633]" },
+    "AWS Security Hub": { icon: FaAws, color: "text-[#FF9900]" }
 };
 
 const ServiceDeepDive = ({ service }) => {
@@ -159,13 +168,23 @@ const ServiceDeepDive = ({ service }) => {
                 <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-8 border-b border-slate-200 pb-2 inline-block">Technology Stack</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {service.technologies.map((tech, index) => {
+                        const techData = techMap[tech];
+                        const Icon = techData ? techData.icon : null;
+                        const iconColor = techData ? techData.color : "text-slate-400";
+
                         return (
                             <motion.div
                                 key={index}
                                 whileHover={{ y: -3 }}
-                                className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border border-slate-100 shadow-sm transition-all h-28"
+                                className="flex flex-col items-center justify-center p-6 bg-white rounded-xl border border-slate-100 shadow-sm transition-all h-28 hover:shadow-md"
                             >
-                                <div className="w-1.5 h-1.5 rounded-full bg-slate-200 mb-3" />
+                                {Icon ? (
+                                    <Icon size={32} className={`mb-3 ${iconColor}`} />
+                                ) : (
+                                    <div className="w-8 h-8 rounded-full bg-slate-100 mb-3 flex items-center justify-center">
+                                        <div className="w-2 h-2 rounded-full bg-slate-300" />
+                                    </div>
+                                )}
                                 <span className="font-bold text-slate-700 text-sm text-center">{tech}</span>
                             </motion.div>
                         );

@@ -240,25 +240,26 @@ export const serviceDetails = {
         technologies: ["Jira Service Desk", "TeamViewer", "Active Directory", "Cisco", "Sophos", "Office 365"],
         image: itSupportImg
     },
-    'dm-11': {
-        title: "Digital Marketing",
-        subtitle: "Data-Driven Growth Strategies",
-        description: "Building a great product isn't enough; you need to be found. Our digital marketing experts use data-driven strategies to increase visibility, drive traffic, and boost your ROI.",
+    'dm-11': undefined, // Removed DM as it has its own page
+    'security': {
+        title: "Cyber Security Services",
+        subtitle: "Protect Your Digital Assets 24/7",
+        description: "In an era of increasing cyber threats, security is not an option—it's a necessity. We provide comprehensive cybersecurity solutions that protect your infrastructure, data, and users from evolving threats. From vulnerability assessments to real-time monitoring and incident response, we ensure your business remains resilient against attacks.",
         features: [
-            "Search Engine Optimization (SEO)",
-            "Pay-Per-Click (PPC) Advertising",
-            "Social Media Marketing & Management",
-            "Content Strategy & Copywriting",
-            "Email Marketing Automation",
-            "Analytics & Conversion Rate Optimization"
+            "Vulnerability Assessment & Penetration Testing (VAPT)",
+            "Security Operations Center (SOC) as a Service",
+            "Identity & Access Management (IAM)",
+            "Cloud Security Posture Management",
+            "Endpoint Detection & Response (EDR)",
+            "Compliance Audits (GDPR, ISO 27001)"
         ],
         process: [
-            { title: "Analysis", desc: "Auditing current market presense." },
-            { title: "Strategy", desc: "Selecting channels and budgets." },
-            { title: "Execution", desc: "Launching campaigns and content." },
-            { title: "Optimization", desc: "Refining based on performance data." }
+            { title: "Assess", desc: "Identifying vulnerabilities and risks." },
+            { title: "Protect", desc: "Implementing defense mechanisms." },
+            { title: "Monitor", desc: "24/7 surveillance of network traffic." },
+            { title: "Respond", desc: "Rapid action on detected threats." }
         ],
-        technologies: ["Google Analytics", "SEMrush", "HubSpot", "Meta Ads", "Google Ads", "Mailchimp"],
-        image: digitalMarketingImg
+        technologies: ["Splunk", "CrowdStrike", "Wireshark", "Nessus", "Burp Suite", "AWS Security Hub"],
+        image: itSupportImg // Reusing IT support image as placeholder if no specific one
     }
 };

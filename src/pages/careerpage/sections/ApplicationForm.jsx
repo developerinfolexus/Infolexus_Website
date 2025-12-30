@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-import { Send, Upload } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Send, Upload, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 const ApplicationForm = () => {
+    const formRef = useRef();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+    const [fileName, setFileName] = useState('');
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -14,12 +19,65 @@ const ApplicationForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const subject = `Job Application: ${formData.position}`;
-        const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0APhone: ${formData.phone}%0D%0APosition: ${formData.position}%0D%0AMessage: ${formData.message}%0D%0A%0D%0A[Please attach your resume to this email]`;
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setFileName(e.target.files[0].name);
+        }
+    };
 
-        window.location.href = `mailto:recruiter1@infolexus.com?subject=${subject}&body=${body}`;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus(null);
+
+        // Using FormSubmit.co for free, simulated unlimited emails
+        // No API key required, just the destination email
+        // We use the /ajax endpoint to keep the user on our page (no redirect)
+        const endpoint = "https://formsubmit.co/ajax/kumarsasi9081@gmail.com";
+
+        try {
+            const response = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: `New Job Application: ${formData.position}`,
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    position: formData.position,
+                    message: formData.message,
+                    // Sending only the filename as this is a "demo" upload
+                    resume_status: fileName ? `Attached: ${fileName}` : 'No resume attached',
+                    _template: 'table', // FormSubmit formats it nicely in a table
+                    _captcha: "false", // Disable captcha for easier testing
+                    _autoresponse: "Thank you for your application. We will review it shortly." // Auto-reply to user
+                })
+            });
+
+            if (response.ok) {
+                setSubmitStatus('success');
+                setIsSubmitting(false);
+                setFormData({
+                    name: '',
+                    email: '',
+                    phone: '',
+                    position: '',
+                    message: ''
+                });
+                setFileName('');
+                // Reset status after 5 seconds
+                setTimeout(() => setSubmitStatus(null), 5000);
+            } else {
+                throw new Error('Submission failed');
+            }
+        } catch (error) {
+            console.log('Failed to send email:', error);
+            setSubmitStatus('error');
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -27,7 +85,27 @@ const ApplicationForm = () => {
             <h3 className="text-3xl font-black text-slate-900 mb-2 text-center">Apply Now</h3>
             <p className="text-slate-500 mb-8 text-center font-medium">Join our team of innovators.</p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-50 text-green-700 rounded-xl flex items-center gap-3 border border-green-200">
+                    <CheckCircle size={20} />
+                    <div>
+                        <p className="font-bold">Application Sent!</p>
+                        <p className="text-sm">We've received your details and will contact you soon.</p>
+                    </div>
+                </div>
+            )}
+
+            {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-xl flex items-center gap-3 border border-red-200">
+                    <AlertCircle size={20} />
+                    <div>
+                        <p className="font-bold">Submission Failed</p>
+                        <p className="text-sm">Please check your configuration or try again later.</p>
+                    </div>
+                </div>
+            )}
+
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                 <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
                     <input
@@ -99,19 +177,34 @@ const ApplicationForm = () => {
                     ></textarea>
                 </div>
 
-                <div className="p-4 border border-dashed border-slate-300 rounded-xl bg-slate-50 text-center">
-                    <p className="text-xs text-slate-500 mb-2">Resume Upload</p>
-                    <button type="button" className="text-blue-600 text-xs font-bold flex items-center justify-center gap-1 mx-auto hover:underline">
-                        <Upload size={12} /> Attach PDF (Simulated)
-                    </button>
-                    <p className="text-[10px] text-slate-400 mt-2 italic">*Please attach file in email client after clicking submit</p>
+                <div className="p-4 border border-dashed border-slate-300 rounded-xl bg-slate-50 text-center relative group hover:border-blue-400 transition-colors">
+                    <p className="text-xs text-slate-500 mb-2">Resume Upload (PDF)</p>
+                    <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+                    <div className="flex flex-col items-center justify-center gap-1">
+                        <Upload size={16} className={`text-slate-400 ${fileName ? 'text-blue-500' : ''}`} />
+                        {fileName ? (
+                            <span className="text-xs font-bold text-blue-600 truncate max-w-[200px]">{fileName}</span>
+                        ) : (
+                            <span className="text-slate-400 text-xs font-medium">Click or drag file to upload</span>
+                        )}
+                    </div>
                 </div>
 
                 <button
                     type="submit"
-                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:hover:scale-100"
                 >
-                    Submit Application <Send size={18} />
+                    {isSubmitting ? (
+                        <>Sending... <Loader2 size={18} className="animate-spin" /></>
+                    ) : (
+                        <>Submit Application <Send size={18} /></>
+                    )}
                 </button>
             </form>
         </div>
