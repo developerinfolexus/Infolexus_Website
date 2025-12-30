@@ -59,6 +59,7 @@ const FloatingSocialBar = () => {
     return (
         <div
             className="fixed right-4 bottom-6 z-50 flex flex-col items-center gap-3 pointer-events-auto"
+<<<<<<< HEAD
             onMouseLeave={() => {
                 setIsOpen(false);
                 if (!isHomePage) setIsDesktopOpen(false);
@@ -113,6 +114,31 @@ const FloatingSocialBar = () => {
                         {isDesktopOpen ? <RiCloseLine size={24} /> : <RiShareFill size={24} />}
                     </button>
                 )}
+=======
+            onMouseLeave={() => setIsOpen(false)}
+        >
+            {/* Desktop: Always Visible Links */}
+            <div className="hidden lg:flex flex-col gap-3 items-center mb-2">
+                {socialLinks.map((item, index) => (
+                    <a
+                        key={`desktop-${index}`}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center justify-center w-10 h-10 ${item.bg} text-white rounded-full shadow-lg hover:scale-110 transition-all duration-300`}
+                    >
+                        <item.icon size={18} />
+                    </a>
+                ))}
+                <a
+                    href="https://wa.me/yourphonenumber"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-10 h-10 bg-[#25D366] text-white rounded-full shadow-lg hover:shadow-[#25D366]/40 hover:scale-110 transition-all duration-300"
+                >
+                    <RiWhatsappLine size={20} />
+                </a>
+>>>>>>> 48360e5d513efa95492e8d42cd5de21380de1f4f
             </div>
 
             {/* Mobile/Tablet: Toggleable Links */}
