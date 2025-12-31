@@ -1,38 +1,43 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Code2 } from 'lucide-react';
+import deplonoixImg from '../../../assets/DEPLONOIX.png';
+import dpImg from '../../../assets/DEPLONOIX.png';
 import botiqueImg from '../../../assets/botique.jpeg';
+import crmImg from '../../../assets/CRM LANDING.png';
+import mobileImg from '../../../assets/mobile 2.png';
+import hrImg from '../../../assets/HRM.png';
 
 const projects = [
     {
+        id: 5,
+        title: 'Deploynix',
+        category: 'HR Tech / Job Portal',
+        description: 'Revolutionizing recruitment with intelligent matchmaking. Deploynix connects top talent with premier employers through an AI-driven job portal, featuring real-time application tracking and seamless hiring workflows.',
+        stack: ['React', 'Tailwind', 'Python', 'Django', 'SQL'],
+        image: { desktop: dpImg, mobile: mobileImg },
+        accent: 'text-indigo-500',
+        bgAccent: 'bg-indigo-500/10',
+        link: '#'
+    },
+    {
         id: 1,
-        title: 'Credit Life',
-        category: 'FinTech / Insurance',
-        description: 'Legacy insurance portfolio management was slow and manual. We built a digital twin platform that automates policy tracking, risk assessment, and claims processing in real-time, reducing processing time by 40%.',
-        stack: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-        image: '/images/projects/credit-life.png',
+        title: 'Custom CRM Solution',
+        category: 'Business Automation / SaaS',
+        description: 'Optimizing customer relationship management with a tailored CRM platform. Designed to stream sales pipelines, automate follow-ups, and provide actionable insights for data-driven decision making.',
+        stack: ['React', 'Node.js', 'MongoDB', 'AWS'],
+        image: crmImg,
         accent: 'text-teal-500',
         bgAccent: 'bg-teal-500/10',
         link: '#'
     },
     {
         id: 2,
-        title: 'ComBus',
-        category: 'Travel / SaaS',
-        description: 'Travelers faced fragmented booking experiences. ComBus unifies inter-city bus networks into a seamless booking engine with real-time seat selection and live tracking, serving over 10k daily routes.',
-        stack: ['Next.js', 'Firebase', 'Google Maps', 'Stripe'],
-        image: '/images/projects/combus.png',
-        accent: 'text-rose-500',
-        bgAccent: 'bg-rose-500/10',
-        link: '#'
-    },
-    {
-        id: 3,
         title: 'Nexus HR',
         category: 'Enterprise / HRM',
         description: 'Managing a distributed workforce requires precision. Nexus HR provides a centralized hub for payroll, attendance, and performance tracking with predictive analytics for seamless workforce management.',
-        stack: ['Vue.js', 'Python', 'Django', 'Redis'],
-        image: '/images/projects/nexus-hr.png',
+        stack: ['React', 'Node.js', 'MongoDB', 'AWS'],
+        image: hrImg,
         accent: 'text-blue-500',
         bgAccent: 'bg-blue-500/10',
         link: '#'
@@ -42,7 +47,7 @@ const projects = [
         title: 'HeShe Style Wear',
         category: 'E-commerce / Retail',
         description: 'We developed a premium, performance-driven eCommerce platform for HeShe Style Wear, creating a seamless and visually engaging shopping experience that drives customer engagement and growth.',
-        stack: ['Html', 'css', 'js','Django','SQL'],
+        stack: ['Html', 'css', 'js', 'Django', 'SQL'],
         image: botiqueImg,
         accent: 'text-amber-500',
         bgAccent: 'bg-amber-500/10',
@@ -57,6 +62,10 @@ const MultiDeviceMockup = ({ image }) => {
         offset: ["start end", "end start"]
     });
 
+    const isMultiImage = typeof image === 'object';
+    const desktopSrc = isMultiImage ? image.desktop : image;
+    const mobileSrc = isMultiImage ? image.mobile : image;
+
     // Parallax effect for screens
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
 
@@ -66,10 +75,10 @@ const MultiDeviceMockup = ({ image }) => {
             {/* --- 1. DESKTOP MONITOR (Back Center) --- */}
             <div className="absolute left-1/2 -translate-x-1/2 bottom-[120px] md:bottom-[140px] w-[60%] md:w-[65%] z-10 transition-transform duration-700 group-hover:scale-[1.02]">
                 {/* Screen Frame */}
-                <div className="bg-slate-900 rounded-t-xl p-2 md:p-3 shadow-2xl border border-slate-700 relative">
+                <div className="bg-slate-900 rounded-t-xl p-[1px] md:p-[2px] shadow-2xl border border-slate-700 relative">
                     <div className="aspect-[16/9] bg-slate-950 rounded overflow-hidden relative group-hover:ring-2 ring-blue-500/20 transition-all">
-                        <motion.div style={{ y }} className="w-full relative">
-                            <img src={image} alt="Desktop" className="w-full h-full object-fill" />
+                        <motion.div className="w-full h-full relative">
+                            <img src={desktopSrc} alt="Desktop" className="w-full h-full object-cover object-top" />
                         </motion.div>
                         {/* Glare */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
@@ -90,10 +99,10 @@ const MultiDeviceMockup = ({ image }) => {
             {/* --- 2. LAPTOP (Left Front) --- */}
             <div className="absolute left-[0%] md:left-[5%] bottom-[40px] md:bottom-[60px] w-[45%] md:w-[48%] z-20 transition-transform duration-700 group-hover:-translate-x-4 hover:z-30">
                 {/* Lid */}
-                <div className="bg-[#1a1a1a] rounded-t-lg p-[6px] shadow-2xl ring-1 ring-white/10">
-                    <div className="aspect-[16/10] bg-black rounded-sm overflow-hidden relative">
-                        <motion.div style={{ y }} className="w-full relative">
-                            <img src={image} alt="Laptop" className="w-full h-full object-fill" />
+                <div className="bg-[#1a1a1a] rounded-t-lg p-[1px] shadow-2xl ring-1 ring-white/10">
+                    <div className="aspect-[16/10] bg-black rounded-[2px] overflow-hidden relative">
+                        <motion.div className="w-full h-full relative">
+                            <img src={desktopSrc} alt="Laptop" className="w-full h-full object-cover object-top" />
                         </motion.div>
                         <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent pointer-events-none" />
                     </div>
@@ -107,10 +116,10 @@ const MultiDeviceMockup = ({ image }) => {
 
             {/* --- 3. TABLET (Right Front) --- */}
             <div className="absolute right-[12%] md:right-[18%] bottom-[40px] md:bottom-[60px] w-[18%] md:w-[20%] z-20 transition-transform duration-700 group-hover:translate-x-4 group-hover:rotate-3 hover:z-30">
-                <div className="bg-slate-800 rounded-[10%] p-[3px] shadow-xl border border-slate-600">
+                <div className="bg-slate-800 rounded-[10%] p-[1px] shadow-xl border border-slate-600">
                     <div className="aspect-[3/4] bg-black rounded-[8%] overflow-hidden relative">
                         <motion.div style={{ y: 0 }} className="w-full h-full relative">
-                            <img src={image} alt="Tablet" className="w-full h-full object-cover object-top" />
+                            <img src={mobileSrc} alt="Tablet" className="w-full h-full object-cover object-top" />
                         </motion.div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                     </div>
@@ -120,10 +129,10 @@ const MultiDeviceMockup = ({ image }) => {
 
             {/* --- 4. SMARTPHONE (Far Right) --- */}
             <div className="absolute right-[2%] md:right-[5%] bottom-[40px] md:bottom-[60px] w-[8%] md:w-[10%] z-30 transition-transform duration-700 group-hover:translate-x-6 group-hover:-rotate-3 hover:z-40">
-                <div className="bg-slate-900 rounded-[14%] p-[2px] shadow-lg border border-slate-700">
+                <div className="bg-slate-900 rounded-[14%] p-[1px] shadow-lg border border-slate-700">
                     <div className="aspect-[9/19] bg-black rounded-[12%] overflow-hidden relative">
                         <motion.div style={{ y: 0 }} className="w-full h-full relative">
-                            <img src={image} alt="Phone" className="w-full h-full object-cover object-top" />
+                            <img src={mobileSrc} alt="Phone" className="w-full h-full object-cover object-top" />
                         </motion.div>
                         {/* Notch */}
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-black rounded-b-sm"></div>
@@ -146,7 +155,7 @@ const ProjectCard = ({ project, index }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-20%" }} // trigger later when more visible
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-20 mb-32 last:mb-0`}
+            className={`flex flex - col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items - center gap - 12 lg: gap - 20 mb - 12 last: mb - 0`}
         >
             {/* Visual Side */}
             <div className="w-full lg:w-1/2">
@@ -156,7 +165,7 @@ const ProjectCard = ({ project, index }) => {
             {/* Content Side */}
             <div className="w-full lg:w-1/2 text-left">
                 <div className="flex items-center gap-3 mb-6">
-                    <span className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest ${project.bgAccent} ${project.accent}`}>
+                    <span className={`px - 3 py - 1 rounded - full text - [11px] font - bold uppercase tracking - widest ${project.bgAccent} ${project.accent} `}>
                         {project.category}
                     </span>
                     <div className="h-px bg-slate-200 flex-grow max-w-[100px]" />
