@@ -5,6 +5,8 @@ import deplonoixImg from '../../../assets/DEPLONOIX.png';
 import dpImg from '../../../assets/DEPLONOIX.png';
 import botiqueImg from '../../../assets/botique.jpeg';
 import crmImg from '../../../assets/CRM LANDING.png';
+import crmTabImg from '../../../assets/CRM-tab.jpeg';
+import crmMobileImg from '../../../assets/CRM-mobile.jpeg';
 import mobileImg from '../../../assets/mobile1.jpeg';
 import hrImg from '../../../assets/HRM.png';
 import soapNotesImg from '../../../assets/soap_notes.png';
@@ -28,7 +30,7 @@ const projects = [
         title: 'HeShe Style Wear',
         category: 'E-commerce / Retail',
         description: 'We developed a premium, performance-driven eCommerce platform for HeShe Style Wear, creating a seamless and visually engaging shopping experience that drives customer engagement and growth.',
-        stack: ['Html', 'css', 'js', 'Django', 'SQL'],
+        stack: ['HTML', 'CSS', 'JS', 'Python', 'Django', 'SQL'],
         image: botiqueImg,
         accent: 'text-amber-500',
         bgAccent: 'bg-amber-500/10',
@@ -62,7 +64,7 @@ const projects = [
         category: 'Business Automation / SaaS',
         description: 'Optimizing customer relationship management with a tailored CRM platform. Designed to stream sales pipelines, automate follow-ups, and provide actionable insights for data-driven decision making.',
         stack: ['React', 'Node.js', 'MongoDB', 'AWS'],
-        image: crmImg,
+        image: { desktop: crmImg, tablet: crmTabImg, mobile: crmMobileImg },
         accent: 'text-teal-500',
         bgAccent: 'bg-teal-500/10',
         link: '#'
@@ -78,7 +80,10 @@ const MultiDeviceMockup = ({ image, video }) => {
 
     const isMultiImage = typeof image === 'object';
     const desktopSrc = isMultiImage ? image.desktop : image;
-    const mobileSrc = isMultiImage ? image.mobile : image;
+    // If tablet is specifically provided, use it; otherwise fallback to mobile or default image
+    const tabletSrc = isMultiImage ? (image.tablet || image.mobile) : image;
+    // If mobile is specifically provided, use it; otherwise fallback to image
+    const phoneSrc = isMultiImage ? (image.mobile || image.desktop) : image;
 
     // Parallax effect for screens
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
@@ -137,11 +142,11 @@ const MultiDeviceMockup = ({ image, video }) => {
 
 
             {/* --- 3. TABLET (Right Front) --- */}
-            <div className="absolute right-[12%] md:right-[18%] bottom-[40px] md:bottom-[60px] w-[18%] md:w-[20%] z-20 transition-transform duration-700 group-hover:translate-x-4 group-hover:rotate-3 hover:z-30">
+            <div className="absolute right-[14%] md:right-[20%] bottom-[35px] md:bottom-[55px] w-[26%] md:w-[20%] z-20 transition-transform duration-700 group-hover:translate-x-4 group-hover:rotate-3 hover:z-30">
                 <div className="bg-slate-800 rounded-[10%] p-[1px] shadow-xl border border-slate-600">
                     <div className="aspect-[3/4] bg-black rounded-[8%] overflow-hidden relative">
                         <motion.div style={{ y: 0 }} className="w-full h-full relative">
-                            <img src={mobileSrc} alt="Tablet" className="w-full h-full object-cover object-top" />
+                            <img src={tabletSrc} alt="Tablet" className="w-full h-full object-cover object-top" />
                         </motion.div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                     </div>
@@ -150,11 +155,11 @@ const MultiDeviceMockup = ({ image, video }) => {
 
 
             {/* --- 4. SMARTPHONE (Far Right) --- */}
-            <div className="absolute right-[2%] md:right-[5%] bottom-[40px] md:bottom-[60px] w-[8%] md:w-[10%] z-30 transition-transform duration-700 group-hover:translate-x-6 group-hover:-rotate-3 hover:z-40">
+            <div className="absolute right-[1%] md:right-[5%] bottom-[30px] md:bottom-[50px] w-[14%] md:w-[10%] z-30 transition-transform duration-700 group-hover:translate-x-6 group-hover:-rotate-3 hover:z-40">
                 <div className="bg-slate-900 rounded-[14%] p-[1px] shadow-lg border border-slate-700">
                     <div className="aspect-[9/19] bg-black rounded-[12%] overflow-hidden relative">
                         <motion.div style={{ y: 0 }} className="w-full h-full relative">
-                            <img src={mobileSrc} alt="Phone" className="w-full h-full object-cover object-top" />
+                            <img src={phoneSrc} alt="Phone" className="w-full h-full object-cover object-top" />
                         </motion.div>
                         {/* Notch */}
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-black rounded-b-sm"></div>
