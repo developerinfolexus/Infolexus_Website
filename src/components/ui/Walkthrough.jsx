@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import walkthroughVideo from '../../assets/walk-through.mp4';
+import walkthroughVideo from '../../assets/walk-through-intro.MOV';
 
 const Walkthrough = ({ onComplete }) => {
     const videoRef = useRef(null);
@@ -17,10 +17,18 @@ const Walkthrough = ({ onComplete }) => {
                 onComplete();
             };
 
+            const handleTimeUpdate = () => {
+                if (video.currentTime >= 5) {
+                    onComplete();
+                }
+            };
+
             video.addEventListener('ended', handleEnded);
+            video.addEventListener('timeupdate', handleTimeUpdate);
 
             return () => {
                 video.removeEventListener('ended', handleEnded);
+                video.removeEventListener('timeupdate', handleTimeUpdate);
             };
         }
     }, [onComplete]);
@@ -30,7 +38,7 @@ const Walkthrough = ({ onComplete }) => {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#030B25]"
+            className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-black"
         >
             {/* Main Video Container */}
             <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4">

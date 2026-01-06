@@ -19,8 +19,28 @@ import voiceDoctorVideo from '../../../assets/voice-booking.mp4';
 import voiceDoctorImgDesktop from '../../../assets/voice_appointment_app.png';
 import voiceDoctorImgTablet from '../../../assets/voice_booking_tablet.png';
 import voiceDoctorImgMobile from '../../../assets/voice_booking_mobile.png';
+import diseaseDetectionVideo from '../../../assets/disease detection.mp4';
+import diseaseDesktopImg from '../../../assets/disease_prediction_desktop.png';
+import diseaseTabletImg from '../../../assets/disease_prediction_tablet_v2.png';
+import diseaseMobileImg from '../../../assets/disease_prediction_mobile_final.png';
 
 const projects = [
+    {
+        id: 8,
+        title: 'AI Deep Learning Disease Prediction',
+        category: 'Healthcare AI / Computer Vision',
+        description: 'An advanced medical diagnostic solution leveraging deep learning to analyze medical images with exceptional accuracy. Using CNNs and transformer-based models, it detects diseases from X-rays, MRI scans, and more, providing identifiable abnormalities and severity evaluations to assist clinicians in early diagnosis.',
+        stack: ['Python', 'TensorFlow', 'PyTorch', 'React', 'OpenCV'],
+        image: {
+            desktop: diseaseDesktopImg,
+            tablet: { src: diseaseTabletImg, className: 'scale-125' }, // Increased scale to fill frame
+            mobile: { src: diseaseMobileImg, className: 'scale-150' }  // Increased scale to crop borders
+        },
+        video: diseaseDetectionVideo,
+        accent: 'text-emerald-500',
+        bgAccent: 'bg-emerald-500/10',
+        link: '#'
+    },
     {
         id: 7,
         title: 'GenAI Voice Doctor Appointment System',
