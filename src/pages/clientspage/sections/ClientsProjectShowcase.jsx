@@ -2,13 +2,17 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Code2 } from 'lucide-react';
 import deplonoixImg from '../../../assets/DEPLONOIX.png';
-import dpImg from '../../../assets/DEPLONOIX.png';
-import botiqueImg from '../../../assets/botique.jpeg';
+import dpImg from '../../../assets/dp.png';
+import botiqueImg from '../../../assets/botique.png';
+import botiqueTabImg from '../../../assets/botique-tab.png';
+import botiqueMobileImg from '../../../assets/botique-mobile.png';
 import crmImg from '../../../assets/CRM LANDING.png';
-import crmTabImg from '../../../assets/CRM-tab.jpeg';
+import crmTabImg from '../../../assets/CRM-tab.jpg';
 import crmMobileImg from '../../../assets/CRM-mobile.jpeg';
 import mobileImg from '../../../assets/mobile1.jpeg';
 import hrImg from '../../../assets/HRM.png';
+import hrTabImg from '../../../assets/HRm-TAB.jpeg';
+import hrMobileImg from '../../../assets/HRM-MOBILE.jpeg';
 import soapNotesImg from '../../../assets/soap_notes.png';
 import soapNotesVideo from '../../../assets/SOAP Notes Generator.mp4';
 
@@ -31,7 +35,7 @@ const projects = [
         category: 'E-commerce / Retail',
         description: 'We developed a premium, performance-driven eCommerce platform for HeShe Style Wear, creating a seamless and visually engaging shopping experience that drives customer engagement and growth.',
         stack: ['HTML', 'CSS', 'JS', 'Python', 'Django', 'SQL'],
-        image: botiqueImg,
+        image: { desktop: botiqueImg, tablet: { src: botiqueTabImg, className: 'scale-125' }, mobile: { src: botiqueMobileImg, className: 'scale-125' } },
         accent: 'text-amber-500',
         bgAccent: 'bg-amber-500/10',
         link: '#'
@@ -42,7 +46,7 @@ const projects = [
         category: 'Enterprise / HRM',
         description: 'Managing a distributed workforce requires precision. Nexus HR provides a centralized hub for payroll, attendance, and performance tracking with predictive analytics for seamless workforce management.',
         stack: ['React', 'Node.js', 'MongoDB', 'AWS'],
-        image: hrImg,
+        image: { desktop: hrImg, tablet: { src: hrTabImg, className: 'scale-150' }, mobile: { src: hrMobileImg, className: 'scale-150' } },
         accent: 'text-blue-500',
         bgAccent: 'bg-blue-500/10',
         link: '#'
@@ -53,7 +57,7 @@ const projects = [
         category: 'HR Tech / Job Portal',
         description: 'Revolutionizing recruitment with intelligent matchmaking. Deploynix connects top talent with premier employers through an AI-driven job portal, featuring real-time application tracking and seamless hiring workflows.',
         stack: ['React', 'Tailwind', 'Python', 'Django', 'SQL'],
-        image: { desktop: dpImg, mobile: mobileImg },
+        image: { desktop: deplonoixImg, tablet: { src: dpImg, className: 'scale-110 object-[15%_50%]' }, mobile: { src: dpImg, className: 'scale-150 object-[75%_100%]' } },
         accent: 'text-indigo-500',
         bgAccent: 'bg-indigo-500/10',
         link: '#'
@@ -78,12 +82,27 @@ const MultiDeviceMockup = ({ image, video }) => {
         offset: ["start end", "end start"]
     });
 
-    const isMultiImage = typeof image === 'object';
-    const desktopSrc = isMultiImage ? image.desktop : image;
-    // If tablet is specifically provided, use it; otherwise fallback to mobile or default image
-    const tabletSrc = isMultiImage ? (image.tablet || image.mobile) : image;
-    // If mobile is specifically provided, use it; otherwise fallback to image
-    const phoneSrc = isMultiImage ? (image.mobile || image.desktop) : image;
+    const resolveImage = (source) => {
+        if (typeof source === 'object' && source !== null && source.src) {
+            return source;
+        }
+        return { src: source, className: '' };
+    };
+
+    const isMultiImage = typeof image === 'object' && !image.src; // Check if it's the config object {desktop:..., mobile:...} not the {src, className} object
+
+    // Desktop is usually just an image or video, assuming simple string for now unless extended, 
+    // but the project structure passes { desktop: ..., ... }
+    const desktopRaw = isMultiImage ? image.desktop : image;
+    // Desktop usually doesn't need scaling fixes based on history, but let's be safe.
+    // For now keeping desktop logic simple as it wasn't the issue.
+    const desktopSrc = typeof desktopRaw === 'object' && desktopRaw.src ? desktopRaw.src : desktopRaw;
+
+    const tabletRaw = isMultiImage ? (image.tablet || image.mobile) : image;
+    const tabletData = resolveImage(tabletRaw);
+
+    const mobileRaw = isMultiImage ? (image.mobile || image.desktop) : image;
+    const mobileData = resolveImage(mobileRaw);
 
     // Parallax effect for screens
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
@@ -100,7 +119,12 @@ const MultiDeviceMockup = ({ image, video }) => {
                             {video ? (
                                 <video src={video} className="w-full h-full object-cover object-top" autoPlay loop muted playsInline />
                             ) : (
-                                <img src={desktopSrc} alt="Desktop" className="w-full h-full object-cover object-top" />
+                                <img
+                                    src={desktopSrc}
+                                    alt="Desktop"
+                                    className="w-full h-full object-cover object-top will-change-transform"
+                                    style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
+                                />
                             )}
                         </motion.div>
                         {/* Glare */}
@@ -128,7 +152,12 @@ const MultiDeviceMockup = ({ image, video }) => {
                             {video ? (
                                 <video src={video} className="w-full h-full object-cover object-top" autoPlay loop muted playsInline />
                             ) : (
-                                <img src={desktopSrc} alt="Laptop" className="w-full h-full object-cover object-top" />
+                                <img
+                                    src={desktopSrc}
+                                    alt="Laptop"
+                                    className="w-full h-full object-cover object-top will-change-transform"
+                                    style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
+                                />
                             )}
                         </motion.div>
                         <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent pointer-events-none" />
@@ -143,10 +172,16 @@ const MultiDeviceMockup = ({ image, video }) => {
 
             {/* --- 3. TABLET (Right Front) --- */}
             <div className="absolute right-[14%] md:right-[20%] bottom-[35px] md:bottom-[55px] w-[26%] md:w-[20%] z-20 transition-transform duration-700 group-hover:translate-x-4 group-hover:rotate-3 hover:z-30">
+                {/* Frame */}
                 <div className="bg-slate-800 rounded-[10%] p-[1px] shadow-xl border border-slate-600">
                     <div className="aspect-[3/4] bg-black rounded-[8%] overflow-hidden relative">
                         <motion.div style={{ y: 0 }} className="w-full h-full relative">
-                            <img src={tabletSrc} alt="Tablet" className="w-full h-full object-cover object-top" />
+                            <img
+                                src={tabletData.src}
+                                alt="Tablet"
+                                className={`w-full h-full object-cover will-change-transform ${tabletData.className || 'object-top'}`}
+                                style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
+                            />
                         </motion.div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                     </div>
@@ -159,7 +194,12 @@ const MultiDeviceMockup = ({ image, video }) => {
                 <div className="bg-slate-900 rounded-[14%] p-[1px] shadow-lg border border-slate-700">
                     <div className="aspect-[9/19] bg-black rounded-[12%] overflow-hidden relative">
                         <motion.div style={{ y: 0 }} className="w-full h-full relative">
-                            <img src={phoneSrc} alt="Phone" className="w-full h-full object-cover object-top" />
+                            <img
+                                src={mobileData.src}
+                                alt="Phone"
+                                className={`w-full h-full object-cover will-change-transform ${mobileData.className || 'object-top'}`}
+                                style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
+                            />
                         </motion.div>
                         {/* Notch */}
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-black rounded-b-sm"></div>

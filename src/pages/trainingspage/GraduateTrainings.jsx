@@ -132,7 +132,7 @@ const GraduateTrainings = () => {
                                         onClick={() => openModal(data.title)}
                                         className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-800 transition-colors group"
                                     >
-                                    Enquiry Now
+                                        Enquiry Now
                                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                     </button>
                                 </div>
@@ -151,7 +151,7 @@ const GraduateTrainings = () => {
                                     <img
                                         src={item.img}
                                         alt={data.title}
-                                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                        className="w-full h-[250px] md:h-[350px] object-cover transform group-hover:scale-105 transition-transform duration-700"
                                     />
                                     {/* Decorative Elements */}
                                     <div className={`absolute -z-10 w-full h-full border-2 border-dashed border-slate-300 rounded-2xl top-4 ${isEven ? 'left-4' : 'right-4'}`} />

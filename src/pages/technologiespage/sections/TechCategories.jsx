@@ -41,6 +41,16 @@ const categories = [
         ]
     },
     {
+        title: "Big Data & Analytics",
+        desc: "Processing and analyzing massive datasets.",
+        color: "from-teal-500 to-emerald-500",
+        techs: [
+            { name: "Apache Spark", icon: SiApachespark, color: "text-[#E25A1C]" },
+            { name: "Hadoop", icon: SiApachehadoop, color: "text-[#66CCFF]" },
+            { name: "Talend", icon: SiTalend, color: "text-[#FF6D70]" },
+        ]
+    },
+    {
         title: "Programming Language",
         desc: "Core languages powering our solutions.",
         color: "from-yellow-400 to-orange-500",
@@ -100,16 +110,7 @@ const categories = [
             { name: "AWS CodePipeline", icon: FaAws, color: "text-[#FF9900]" },
         ]
     },
-    {
-        title: "Big Data & Analytics",
-        desc: "Processing and analyzing massive datasets.",
-        color: "from-teal-500 to-emerald-500",
-        techs: [
-            { name: "Apache Spark", icon: SiApachespark, color: "text-[#E25A1C]" },
-            { name: "Hadoop", icon: SiApachehadoop, color: "text-[#66CCFF]" },
-            { name: "Talend", icon: SiTalend, color: "text-[#FF6D70]" },
-        ]
-    }
+
 ];
 
 const TechCategories = () => {
