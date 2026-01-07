@@ -32,6 +32,8 @@ const ServiceRoadmap = ({ service, variant = 'it' }) => {
     const theme = themes[variant] || themes.it;
     const steps = service.process || service.roadmap || [];
 
+    if (steps.length === 0) return null;
+
     return (
         <div>
             <div className="text-center mb-16">

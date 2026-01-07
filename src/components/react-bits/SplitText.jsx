@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const SplitText = ({ text, className = "", delay = 0 }) => {
-  const letters = text.split("");
+  const words = text.split(" ");
 
   const container = {
     hidden: { opacity: 0 },
@@ -41,10 +41,19 @@ const SplitText = ({ text, className = "", delay = 0 }) => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      {letters.map((letter, index) => (
-        <motion.span variants={child} key={index} className="inline-block">
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
+      {words.map((word, i) => (
+        <React.Fragment key={i}>
+          <span className="inline-block whitespace-nowrap">
+            {word.split("").map((letter, j) => (
+              <motion.span variants={child} key={j} className="inline-block">
+                {letter}
+              </motion.span>
+            ))}
+          </span>
+          {i < words.length - 1 && (
+            <span className="inline-block">&nbsp;</span>
+          )}
+        </React.Fragment>
       ))}
     </motion.span>
   );

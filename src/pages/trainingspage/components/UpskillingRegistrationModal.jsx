@@ -122,7 +122,7 @@ const UpskillingRegistrationModal = ({ isOpen, onClose, initialCourse = '' }) =>
                             >
                                 <X size={20} />
                             </button>
-                            <h2 className="text-2xl font-bold mb-1">Inquire Now</h2>
+                            <h2 className="text-2xl font-bold mb-1">Enquire Now</h2>
                             <p className="text-cyan-200 text-sm">
                                 Register for our industry-leading upskilling courses.
                             </p>

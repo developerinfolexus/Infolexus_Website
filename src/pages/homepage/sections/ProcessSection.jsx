@@ -20,8 +20,8 @@ const steps = [
         color: "from-blue-500 to-indigo-600",
         shadow: "shadow-blue-500/40",
         angle: 270,
-        // 270 deg (Top) -> Text Centered Above
-        textWrapperClass: "bottom-[140%] left-1/2 -translate-x-1/2 items-center text-center",
+        // 270 deg (Top) -> Text Centered Above (Mobile), Above (Desktop)
+        textWrapperClass: "bottom-[120%] md:top-auto md:bottom-[150%] left-1/2 -translate-x-1/2 items-center text-center",
         imgPadding: "12px"
     },
     {
@@ -32,8 +32,8 @@ const steps = [
         color: "from-cyan-400 to-blue-500",
         shadow: "shadow-cyan-500/40",
         angle: 330,
-        // 330 deg (Top Right) -> Text Left-Aligned (Push Right)
-        textWrapperClass: "left-[140%] top-1/2 -translate-y-1/2 items-start text-left",
+        // 330 deg (Top Right) -> Text Centered Above (Mobile), Left-Aligned (Desktop)
+        textWrapperClass: "bottom-[120%] left-1/2 -translate-x-1/2 items-center text-center md:top-1/2 md:left-[140%] md:translate-x-0 md:-translate-y-1/2 md:items-start md:text-left",
         imgPadding: "5px"
     },
     {
@@ -44,8 +44,8 @@ const steps = [
         color: "from-purple-500 to-fuchsia-600",
         shadow: "shadow-purple-500/40",
         angle: 30,
-        // 30 deg (Bottom Right) -> Text Left-Aligned (Push Right)
-        textWrapperClass: "left-[140%] top-1/2 -translate-y-1/2 items-start text-left",
+        // 30 deg (Bottom Right) -> Text Centered Below (Mobile), Left-Aligned (Desktop)
+        textWrapperClass: "top-[120%] left-1/2 -translate-x-1/2 items-center text-center md:top-1/2 md:left-[140%] md:translate-x-0 md:-translate-y-1/2 md:items-start md:text-left",
         imgPadding: "5px"
     },
     {
@@ -56,8 +56,8 @@ const steps = [
         color: "from-pink-500 to-rose-500",
         shadow: "shadow-pink-500/40",
         angle: 90,
-        // 90 deg (Bottom) -> Text Centered Below
-        textWrapperClass: "top-[140%] left-1/2 -translate-x-1/2 items-center text-center",
+        // 90 deg (Bottom) -> Text Centered Below (Mobile & Desktop)
+        textWrapperClass: "top-[120%] md:top-[150%] left-1/2 -translate-x-1/2 items-center text-center",
         imgPadding: "5px"
     },
     {
@@ -68,8 +68,8 @@ const steps = [
         color: "from-orange-400 to-amber-500",
         shadow: "shadow-orange-500/40",
         angle: 150,
-        // 150 deg (Bottom Left) -> Text Right-Aligned (Push Left)
-        textWrapperClass: "right-[140%] top-1/2 -translate-y-1/2 items-end text-right",
+        // 150 deg (Bottom Left) -> Text Centered Below (Mobile), Right-Aligned (Desktop, Outside Left)
+        textWrapperClass: "top-[120%] left-1/2 -translate-x-1/2 items-center text-center md:top-1/2 md:left-auto md:right-[140%] md:translate-x-0 md:-translate-y-1/2 md:items-end md:text-right",
         imgPadding: "5px"
     },
     {
@@ -80,8 +80,8 @@ const steps = [
         color: "from-emerald-400 to-green-500",
         shadow: "shadow-emerald-500/40",
         angle: 210,
-        // 210 deg (Top Left) -> Text Right-Aligned (Push Left)
-        textWrapperClass: "right-[140%] top-1/2 -translate-y-1/2 items-end text-right",
+        // 210 deg (Top Left) -> Text Centered Above (Mobile), Right-Aligned (Desktop, Outside Left)
+        textWrapperClass: "bottom-[120%] left-1/2 -translate-x-1/2 items-center text-center md:top-1/2 md:left-auto md:right-[140%] md:translate-x-0 md:-translate-y-1/2 md:items-end md:text-right",
         imgPadding: "12px"
     }
 ];
@@ -257,11 +257,11 @@ group-hover:scale-110 transition-transform duration-300 z-20`}>
                                 </div>
 
                                 {/* TEXT LABEL */}
-                                <div className={`absolute w-52 flex flex-col ${s.textWrapperClass} hidden md:flex transition-opacity duration-300 opacity-90 group-hover:opacity-100 z-40`}>
-                                    <h3 className="text-white font-bold text-base md:text-lg leading-tight drop-shadow-lg">
+                                <div className={`absolute w-28 md:w-52 flex flex-col ${s.textWrapperClass} flex transition-all duration-300 opacity-100 group-hover:opacity-100 z-40 pointer-events-none`}>
+                                    <h3 className="text-white font-bold text-xs md:text-lg leading-tight drop-shadow-lg">
                                         {s.title}
                                     </h3>
-                                    <p className="text-blue-200 text-[10px] md:text-xs uppercase tracking-wider font-semibold mt-0.5">
+                                    <p className="text-blue-200 text-[9px] md:text-xs uppercase tracking-wider font-semibold mt-0.5 hidden md:block">
                                         {s.sub}
                                     </p>
                                 </div>

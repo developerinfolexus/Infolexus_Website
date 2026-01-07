@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2, MessageSquare } from 'lucide-react';
 
 const ContactFormSection = () => {
     const formRef = useRef();
@@ -67,9 +67,15 @@ const ContactFormSection = () => {
 
     return (
         <div className="container mx-auto px-4 md:px-6 py-16 -mt-10">
+            <div className="flex justify-center mb-6">
+                <span className="inline-flex items-center gap-2 py-1.5 px-5 rounded-full bg-[#081A4A] backdrop-blur-md border border-white/10 text-cyan-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-white/10 transition-colors cursor-default shadow-lg shadow-cyan-500/10">
+                    <MessageSquare size={14} />
+                    Get in Touch
+                </span>
+            </div>
             <div className="bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row">
                 {/* Contact Info */}
-                <div className="bg-[#081A4A]/95 text-white p-10 md:p-12 md:w-2/5 flex flex-col justify-between">
+                <div className="hidden md:flex bg-[#081A4A]/95 text-white p-10 md:p-12 md:w-2/5 flex-col justify-between">
                     <div>
                         <h2 className="text-2xl font-bold mb-8">Contact Information</h2>
                         <div className="space-y-8">
@@ -115,6 +121,7 @@ const ContactFormSection = () => {
                     </div>
                 </div>
 
+                {/* Contact Form */}
                 {/* Contact Form */}
                 <div className="p-10 md:p-12 md:w-3/5 bg-white">
                     <h2 className="text-2xl font-bold text-slate-900 mb-6">Send us a Message</h2>

@@ -133,7 +133,7 @@ const PlacementSupport = () => {
                                             onClick={() => setIsModalOpen(true)}
                                             className="inline-flex items-center gap-3 text-white bg-indigo-600 px-8 py-3 rounded-full font-bold hover:bg-indigo-700 transition-all shadow-lg hover:shadow-indigo-500/30 group cursor-pointer"
                                         >
-                                            Inquire Now
+                                            Enquire Now
                                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                         </button>
                                     </div>

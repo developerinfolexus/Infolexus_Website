@@ -70,7 +70,7 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
         // Add standard formsubmit fields
         submissionData._template = 'table';
         submissionData._captcha = 'false';
-        submissionData._autoresponse = "Thank you for inquiring with Infolexus. We'll be in touch shortly.";
+        submissionData._autoresponse = "Thank you for enquiring with Infolexus. We'll be in touch shortly.";
 
         try {
             const response = await fetch("https://formsubmit.co/ajax/support@infolexus.com", {
@@ -133,7 +133,7 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                         {/* Header */}
                         <div className="bg-[#081A4A] px-6 py-4 flex justify-between items-center shrink-0">
                             <div>
-                                <h3 className="text-xl font-bold text-white">Inquire Now</h3>
+                                <h3 className="text-xl font-bold text-white">Enquire Now</h3>
                                 <p className="text-blue-200 text-sm">
                                     {type === 'placement'
                                         ? "Register for our industry-leading upskilling courses."
@@ -150,7 +150,7 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                             {submitStatus === 'success' ? (
                                 <div className="flex flex-col items-center justify-center py-12 text-center text-green-600">
                                     <CheckCircle size={48} className="mb-4" />
-                                    <h4 className="text-xl font-bold">Inquiry Sent Successfully!</h4>
+                                    <h4 className="text-xl font-bold">Enquiry Sent Successfully!</h4>
                                     <p className="text-slate-600 mt-2">We will get back to you shortly.</p>
                                 </div>
                             ) : submitStatus === 'error' ? (

@@ -58,12 +58,45 @@ const Navbar = () => {
         }
     }, [isOpen]);
 
+    // Handle External "Explore Services" Click Events
+    useEffect(() => {
+        const handleOpenMegaMenu = (event) => {
+            const { categoryIndex } = event.detail;
+
+            // Desktop Behavior
+            if (window.innerWidth >= 1024) {
+                // Clear any existing leave timeout to prevent immediate closing
+                if (leaveTimeout.current) clearTimeout(leaveTimeout.current);
+
+                setActiveDropdown('OUR SERVICES');
+                setActiveServiceCategory(categoryIndex);
+                setActiveSubService(0);
+
+                // Option: Auto-scroll to top so navbar is visible if sticky
+                // window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            // Mobile Behavior
+            else {
+                setIsOpen(true); // Open Drawer
+                setMobileSubMenuOpen(true); // Open 'OUR SERVICES' accordion
+                setExpandedCategory(categoryIndex); // Expand specific category (IT/HR/DM)
+                setExpandedSubCategory(null); // Reset sub-category
+            }
+        };
+
+        window.addEventListener('openMegaMenu', handleOpenMegaMenu);
+        return () => window.removeEventListener('openMegaMenu', handleOpenMegaMenu);
+    }, []);
+
     const handleMouseEnter = (name) => {
         if (leaveTimeout.current) clearTimeout(leaveTimeout.current);
-        setActiveDropdown(name);
-        if (name === 'OUR SERVICES') {
-            setActiveServiceCategory(0);
-            setActiveSubService(0);
+
+        if (activeDropdown !== name) {
+            setActiveDropdown(name);
+            if (name === 'OUR SERVICES') {
+                setActiveServiceCategory(0);
+                setActiveSubService(0);
+            }
         }
     };
 

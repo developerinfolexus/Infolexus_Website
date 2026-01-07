@@ -27,10 +27,7 @@ const ContactHeader = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <span className="inline-flex items-center gap-2 py-1.5 px-5 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-cyan-400 text-xs font-bold tracking-[0.2em] uppercase mb-8 hover:bg-white/10 transition-colors cursor-default shadow-lg shadow-cyan-500/10">
-                            <MessageSquare size={14} />
-                            Get in Touch
-                        </span>
+
 
                         <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.1] mb-8 text-white drop-shadow-2xl">
                             Let’s Build Something <br />

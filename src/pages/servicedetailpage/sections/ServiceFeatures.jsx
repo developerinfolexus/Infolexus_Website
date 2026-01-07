@@ -55,8 +55,8 @@ const ServiceFeatures = ({ service, variant = 'it' }) => {
 
     // Get current items
     const currentFeatures = shouldPaginate
-        ? service.features.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-        : service.features;
+        ? (service.features || []).slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+        : (service.features || []);
 
     const handleNext = () => {
         if (currentPage < totalPages) setCurrentPage(prev => prev + 1);

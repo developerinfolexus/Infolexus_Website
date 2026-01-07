@@ -262,7 +262,7 @@ const ProjectCard = ({ project, index }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-20%" }} // trigger later when more visible
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-20 mb-24 last:mb-0`}
+            className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-0 lg:gap-20 mb-24 last:mb-0`}
         >
             {/* Visual Side */}
             <div className="w-full lg:w-1/2 order-2 lg:order-none">
@@ -272,7 +272,7 @@ const ProjectCard = ({ project, index }) => {
             {/* Content Side */}
             <div className="contents lg:block w-full lg:w-1/2 text-left">
                 <div className="w-full order-1 lg:order-none">
-                    <div className="flex items-center gap-3 mb-6">
+                    <div className="flex items-center gap-3 mb-3 md:mb-6">
                         <span className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest ${project.bgAccent} ${project.accent}`}>
                             {project.category}
                         </span>
@@ -283,7 +283,7 @@ const ProjectCard = ({ project, index }) => {
                         {project.title}
                     </h3>
 
-                    <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                    <p className="text-slate-600 text-lg leading-relaxed mb-4 md:mb-8">
                         {project.description}
                     </p>
                 </div>
@@ -309,7 +309,7 @@ const ProjectCard = ({ project, index }) => {
                         href="#consultation-form"
                         className="inline-flex items-center gap-2 text-brand-blue font-bold text-sm tracking-wide group hover:text-blue-700 transition-colors"
                     >
-                        INQUIRE NOW
+                        ENQUIRE NOW
                         <ArrowRight size={16} className="transform transition-transform group-hover:translate-x-1" />
                     </a>
                 </div>

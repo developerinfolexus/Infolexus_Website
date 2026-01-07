@@ -44,7 +44,12 @@ const Capabilities = () => {
                                 We engineer scalable, high-performance software tailored to your specific business needs. From custom web and mobile application development to complex cloud infrastructure.
                             </p>
 
-                            <div className="flex items-center gap-2 text-cyan-400 font-semibold text-sm cursor-pointer group/link">
+                            <div
+                                onClick={() => {
+                                    window.dispatchEvent(new CustomEvent('openMegaMenu', { detail: { categoryIndex: 0 } }));
+                                }}
+                                className="flex items-center gap-2 text-cyan-400 font-semibold text-sm cursor-pointer group/link"
+                            >
                                 <span>Explore Services</span>
                                 <ArrowRight size={16} className="transition-transform group-hover/link:translate-x-1" />
                             </div>
@@ -74,7 +79,12 @@ const Capabilities = () => {
                                 From <strong>Recruitment & Talent Acquisition</strong> to <strong>Staffing Solutions</strong> and <strong>HR Consulting</strong>, we handle it all. We also streamline operations with <strong>Onboarding</strong>, <strong>Payroll Administration</strong>, <strong>Skill Development</strong>, and <strong>Performance Management</strong> support.
                             </p>
 
-                            <div className="flex items-center gap-2 text-purple-400 font-semibold text-sm cursor-pointer group/link">
+                            <div
+                                onClick={() => {
+                                    window.dispatchEvent(new CustomEvent('openMegaMenu', { detail: { categoryIndex: 2 } }));
+                                }}
+                                className="flex items-center gap-2 text-purple-400 font-semibold text-sm cursor-pointer group/link"
+                            >
                                 <span>Explore Services</span>
                                 <ArrowRight size={16} className="transition-transform group-hover/link:translate-x-1" />
                             </div>
@@ -104,7 +114,12 @@ const Capabilities = () => {
                                 Drive growth with <strong>Social Media Marketing</strong>, <strong>SEO</strong>, and targeted <strong>Google & Social Ads</strong>. We elevate brands through <strong>Content & Email Marketing</strong>, <strong>Website Optimization</strong>, detailed <strong>Analytics</strong>, and professional <strong>Video Production</strong>.
                             </p>
 
-                            <div className="flex items-center gap-2 text-orange-400 font-semibold text-sm cursor-pointer group/link">
+                            <div
+                                onClick={() => {
+                                    window.dispatchEvent(new CustomEvent('openMegaMenu', { detail: { categoryIndex: 1 } }));
+                                }}
+                                className="flex items-center gap-2 text-orange-400 font-semibold text-sm cursor-pointer group/link"
+                            >
                                 <span>Explore Services</span>
                                 <ArrowRight size={16} className="transition-transform group-hover/link:translate-x-1" />
                             </div>

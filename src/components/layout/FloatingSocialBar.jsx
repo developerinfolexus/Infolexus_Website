@@ -127,11 +127,7 @@ const FloatingSocialBar = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="lg:hidden flex items-center justify-center w-12 h-12 bg-[#020617] border border-white/20 text-white rounded-full shadow-2xl hover:bg-cyan-600 hover:border-cyan-500 transition-all duration-300 group z-50 order-first"
             >
-                <div className={`transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}>
-                    <span className="block w-5 h-0.5 bg-white mb-1"></span>
-                    <span className="block w-5 h-0.5 bg-white mb-1"></span>
-                    <span className="block w-5 h-0.5 bg-white"></span>
-                </div>
+                {isOpen ? <RiCloseLine size={24} /> : <RiGlobalLine size={24} />}
             </button>
 
             {/* Back to Top Button - BELOW Hamburger */}

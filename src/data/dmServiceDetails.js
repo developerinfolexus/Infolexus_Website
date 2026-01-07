@@ -404,7 +404,7 @@ export const dmServiceDetails = {
         subtitle: "Building Authority and Trust.",
         description: "Your site's reputation is built outside of it. We execute ethical link-building strategies, guest posting, and social signaling to demonstrate your authority to search engines.",
         features: ["Backlink Building", "Guest Blogging", "Social Signals", "Brand Mentions", "Influencer Outreach"],
-        process: [{ title: "Research", desc: "Finding authority sites." }, { title: "Outreach", desc: "Pitching content." }, { title: "Link", desc: "Securing backlinks." }],
+        process: [{ title: "Research", desc: "Finding authority sites." }, { title: "Outreach", desc: "Pitching content." }, { title: "Link", desc: "Securing backlinks." }, { title: "Monitor", desc: "Tracking backlink health." }],
         technologies: ["Ahrefs", "Moz", "BuzzSumo"],
         image: seoImg
     },
@@ -495,6 +495,7 @@ export const dmServiceDetails = {
         subtitle: "SEO-Rich Long Form Content.",
         description: "Detailed articles that answer your customers' questions. Great for building authority and ranking for long-tail keywords.",
         features: ["Keyword Integration", "Topic Research", "Evergreen Content"],
+        technologies: ["WordPress", "Google Docs", "Grammarly", "Yoast SEO"],
         image: contentImg
     },
     'video-marketing': {
@@ -502,44 +503,67 @@ export const dmServiceDetails = {
         subtitle: "Promoting Your Visual Story.",
         description: "It's not enough to make a video; you have to distribute it. We plan how to seed your video content across platforms for maximum views.",
         features: ["YouTube Optimization", "Video SEO", "Distribution Planning"],
+        technologies: ["YouTube", "TikTok", "Meta Ads", "Google Analytics"],
         image: videoImg
     },
     'creative-writing': {
-        title: "Creative Copywriting",
+        title: "Creative Writing",
         subtitle: "Brand Voice Development.",
         description: "Establishing a unique tone of voice. From punchy taglines to emotional brand manifestos.",
-        image: contentImg
+        image: contentImg,
+        features: ["Brand Voice Strategy", "Web Copywriting", "SEO Articles", "Ad Copy", "Email Scripts", "Product Descriptions"],
+        technologies: ["Google Docs", "Grammarly", "Yoast SEO", "Hemingway App"]
     },
     'email-marketing': {
         title: "Email Marketing",
         subtitle: "Direct to Inbox.",
         description: "Newsletters and promos that get opened.",
-        image: emailImg
+        image: emailImg,
+        features: ["Campaign Strategy", "Newsletter Design", "List Segmentation", "Automated Flows", "A/B Testing", "Analytics"],
+        technologies: ["Mailchimp", "Klaviyo", "HubSpot", "Litmus"],
+        process: [
+            { title: "Audit", desc: "Reviewing current list health." },
+            { title: "Design", desc: "Creating mobile-friendly templates." },
+            { title: "Deploy", desc: "Scheduling segmented campaigns." },
+            { title: "Analyze", desc: "Reviewing open and click rates." }
+        ]
     },
     'whatsapp-marketing': {
         title: "WhatsApp Marketing",
         subtitle: "Instant Customer Connection.",
         description: "Using the WhatsApp Business API for broadcast messages and automated support.",
-        features: ["Broadcast Lists", "Chatbots", "Catalog Sharing"],
+        features: ["Broadcast Lists", "Chatbots", "Catalog Sharing", "Automated Replies", "Message Templates", "Click-to-Chat Ads"],
+        technologies: ["WhatsApp Business API", "Twilio", "Wati", "Interakt"],
         image: emailImg
     },
     'marketing-automation': {
         title: "Marketing Automation",
         subtitle: "Set It and Forget It.",
         description: "Building workflows that nurture leads automatically based on their behavior.",
-        features: ["Email Sequences", "Lead Scoring", "CRM Sync"],
+        features: ["Email Sequences", "Lead Scoring", "CRM Sync", "Behavioral Triggers", "Dynamic Content", "Auto-responders"],
+        technologies: ["HubSpot", "ActiveCampaign", "Marketo", "Zapier"],
         image: emailImg
     },
     'performance-tracking': {
         title: "Performance Tracking",
         subtitle: "Live Metric Monitoring.",
         description: "Dashboards that show you exactly how your marketing is performing in real-time.",
-        image: analyticsImg
+        image: analyticsImg,
+        features: ["Real-time Dashboards", "KPI Monitoring", "Custom Reports", "Goal Tracking", "Funnel Visualization", "Attribution Modeling"],
+        technologies: ["Google Looker Studio", "Tableau", "Databox", "PowerBI"],
+        process: [
+            { title: "Setup", desc: "Connecting data sources." },
+            { title: "Monitor", desc: "Tracking live metrics." },
+            { title: "Report", desc: "Generating weekly insights." },
+            { title: "Optimize", desc: "Refining KPIs." }
+        ]
     },
     'roi-analysis': {
         title: "ROI Analysis",
         subtitle: "The Bottom Line.",
         description: "Calculating the exact return on every marketing dollar spent.",
-        image: analyticsImg
+        image: analyticsImg,
+        features: ["Cost Analysis", "Revenue Attribution", "Campaign ROI", "Forecasting", "Budget Optimization", "Trend Analysis"],
+        technologies: ["Excel", "Google Sheets", "Supermetrics", "ProfitWell"]
     }
 };
