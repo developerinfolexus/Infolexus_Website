@@ -82,7 +82,7 @@ const projects = [
     },
     {
         id: 2,
-        title: 'Nexus HR',
+        title: 'HRM',
         category: 'Enterprise / HRM',
         description: 'Managing a distributed workforce requires precision. Nexus HR provides a centralized hub for payroll, attendance, and performance tracking with predictive analytics for seamless workforce management.',
         stack: ['React', 'Node.js', 'MongoDB', 'AWS'],
@@ -265,50 +265,54 @@ const ProjectCard = ({ project, index }) => {
             className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-20 mb-24 last:mb-0`}
         >
             {/* Visual Side */}
-            <div className="w-full lg:w-1/2">
+            <div className="w-full lg:w-1/2 order-2 lg:order-none">
                 <MultiDeviceMockup image={project.image} video={project.video} />
             </div>
 
             {/* Content Side */}
-            <div className="w-full lg:w-1/2 text-left">
-                <div className="flex items-center gap-3 mb-6">
-                    <span className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest ${project.bgAccent} ${project.accent}`}>
-                        {project.category}
-                    </span>
-                    <div className="h-px bg-slate-200 flex-grow max-w-[100px]" />
-                </div>
-
-                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                    {project.title}
-                </h3>
-
-                <p className="text-slate-600 text-lg leading-relaxed mb-8">
-                    {project.description}
-                </p>
-
-                <div className="mb-8">
-                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                        <Code2 size={14} /> Technologies
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                        {project.stack.map((tech) => (
-                            <span
-                                key={tech}
-                                className="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200"
-                            >
-                                {tech}
-                            </span>
-                        ))}
+            <div className="contents lg:block w-full lg:w-1/2 text-left">
+                <div className="w-full order-1 lg:order-none">
+                    <div className="flex items-center gap-3 mb-6">
+                        <span className={`px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest ${project.bgAccent} ${project.accent}`}>
+                            {project.category}
+                        </span>
+                        <div className="h-px bg-slate-200 flex-grow max-w-[100px]" />
                     </div>
+
+                    <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+                        {project.title}
+                    </h3>
+
+                    <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                        {project.description}
+                    </p>
                 </div>
 
-                <a
-                    href={project.link}
-                    className="inline-flex items-center gap-2 text-brand-blue font-bold text-sm tracking-wide group hover:text-blue-700 transition-colors"
-                >
-                    VIEW CASE STUDY
-                    <ArrowRight size={16} className="transform transition-transform group-hover:translate-x-1" />
-                </a>
+                <div className="w-full order-3 lg:order-none">
+                    <div className="mb-8">
+                        <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                            <Code2 size={14} /> Technologies
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                            {project.stack.map((tech) => (
+                                <span
+                                    key={tech}
+                                    className="px-3 py-1.5 bg-slate-100 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200"
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+
+                    <a
+                        href={project.link}
+                        className="inline-flex items-center gap-2 text-brand-blue font-bold text-sm tracking-wide group hover:text-blue-700 transition-colors"
+                    >
+                        VIEW CASE STUDY
+                        <ArrowRight size={16} className="transform transition-transform group-hover:translate-x-1" />
+                    </a>
+                </div>
             </div>
         </motion.div>
     );

@@ -16,10 +16,10 @@ const Footer = () => {
 
             <div className="w-full px-2 md:px-4 relative z-10">
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+                <div className="grid grid-cols-2 lg:grid-cols-12 gap-x-4 gap-y-12 lg:gap-8 mb-16">
 
                     {/* Brand Column (Span 4) */}
-                    <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-12">
+                    <div className="col-span-2 lg:col-span-4 flex flex-col items-start pr-0 lg:pr-12">
                         <Link to="/" className="inline-block mb-8">
                             <img
                                 src={footerLogo}
@@ -27,7 +27,7 @@ const Footer = () => {
                                 className="h-10 md:h-14 w-auto object-contain object-left"
                             />
                         </Link>
-                        <div className="pl-3 md:pl-12">
+                        <div className="md:pl-12">
                             <p className="text-slate-400 leading-relaxed mb-8">
                                 Infolexus is a premier technology partner <br /> delivering innovative IT solutions and strategic workforce management to global enterprises.
                             </p>
@@ -53,7 +53,7 @@ const Footer = () => {
                     </div>
 
                     {/* Links Column (Span 2) */}
-                    <div className="lg:col-span-2">
+                    <div className="col-span-1 lg:col-span-2">
                         <h4 className="text-white font-bold mb-6">Company</h4>
                         <ul className="space-y-4 text-sm text-slate-400">
                             <li><Link to="/" className="hover:text-blue-400 transition-colors">Home</Link></li>
@@ -65,12 +65,12 @@ const Footer = () => {
                     </div>
 
                     {/* Contact Column (Span 3) - Moved Left */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-white font-bold mb-5 text-center relative -left-[10px]">Contact Us</h4>
-                        <ul className="space-y-4 text-sm text-slate-400 mx-auto w-fit">
+                    <div className="col-span-1 lg:col-span-3">
+                        <h4 className="text-white font-bold mb-6">Contact Us</h4>
+                        <ul className="space-y-4 text-xs md:text-sm text-slate-400">
                             <li className="flex items-start gap-3">
                                 <MapPin size={18} className="text-blue-500 shrink-0 mt-1" />
-                                <span>Infolexus Solutions,<br />63/54-55, Dhamu Nagar,<br /> Puliyakulam Road,<br /> Coimbatore- 641045</span>
+                                <span>Infolexus Solutions,<br />63/54-55, Dhamu Nagar,<br /> Puliyakulam,<br /> Coimbatore- 641045</span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <Mail size={18} className="text-blue-500 shrink-0 mt-1" />
@@ -88,9 +88,9 @@ const Footer = () => {
                     </div>
 
                     {/* Map Column (Span 3) - Added Right */}
-                    <div className="lg:col-span-3">
-                        <h4 className="text-white font-bold mb-6 text-center relative -left-[15px]">Location</h4>
-                        <div className="w-full h-48 rounded-xl overflow-hidden border border-slate-800 shadow-lg relative -left-[15px]">
+                    <div className="col-span-2 lg:col-span-3">
+                        <h4 className="text-white font-bold mb-6">Location</h4>
+                        <div className="w-full h-48 rounded-xl overflow-hidden border border-slate-800 shadow-lg">
                             <iframe
                                 title="Office Location"
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.347263595567!2d76.9889976757065!3d11.006997092116035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859eb03584a43%3A0x32befeb42d4f385a!2sInfolexus%20Solutions!5e0!3m2!1sen!2sin!4v1713437292323!5m2!1sen!2sin"

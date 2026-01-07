@@ -103,7 +103,7 @@ const RecruitmentSolutions = () => {
                             </motion.div>
 
                             {/* Zig-Zag Content Section */}
-                            <div className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
+                            <div className={`flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
 
                                 {/* Text Content (Description & Actions) */}
                                 <motion.div

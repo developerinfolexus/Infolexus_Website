@@ -29,6 +29,8 @@ const Navbar = () => {
     const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState(false);
     const [activeServiceCategory, setActiveServiceCategory] = useState(0);
     const [activeSubService, setActiveSubService] = useState(0);
+    const [expandedCategory, setExpandedCategory] = useState(null);
+    const [expandedSubCategory, setExpandedSubCategory] = useState(null);
     const leaveTimeout = React.useRef(null);
     const location = useLocation();
 
@@ -243,7 +245,7 @@ const Navbar = () => {
             ]
         },
         {
-            title: 'Trainings',
+            title: 'Up Skill Program',
             description: 'Comprehensive training solutions tailored for institutions and individual career growth.',
             subCategories: [
                 {
@@ -572,53 +574,96 @@ const Navbar = () => {
                                                             exit={{ height: 0, opacity: 0 }}
                                                             className="overflow-hidden"
                                                         >
-                                                            <div className="pl-4 py-2 space-y-4">
+                                                            <div className="pl-4 py-2 space-y-1">
                                                                 {serviceCategories.map((category, idx) => (
-                                                                    <div key={idx} className="space-y-4">
-                                                                        <h4 className="text-blue-500 font-bold text-[10px] uppercase tracking-widest opacity-80 flex items-center gap-2">
-                                                                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                                                                            {category.title}
-                                                                        </h4>
+                                                                    <div key={idx} className="border-b border-white/5 last:border-none">
+                                                                        {/* Level 2: Category Header (e.g. IT SERVICES) */}
+                                                                        <button
+                                                                            onClick={() => {
+                                                                                setExpandedCategory(expandedCategory === idx ? null : idx);
+                                                                                setExpandedSubCategory(null);
+                                                                            }}
+                                                                            className="w-full flex items-center justify-between py-4 pr-4 transition-colors group"
+                                                                        >
+                                                                            <h4 className={`font-bold text-[11px] uppercase tracking-widest flex items-center gap-2 transition-colors ${expandedCategory === idx ? 'text-blue-400' : 'text-slate-400 group-hover:text-white'}`}>
+                                                                                <span className={`w-1.5 h-1.5 rounded-full transition-colors ${expandedCategory === idx ? 'bg-blue-400' : 'bg-slate-600 group-hover:bg-white'}`}></span>
+                                                                                {category.title}
+                                                                            </h4>
+                                                                            <ChevronDown
+                                                                                size={14}
+                                                                                className={`transition-transform duration-300 ${expandedCategory === idx ? 'rotate-180 text-blue-400' : 'text-slate-600 group-hover:text-white'}`}
+                                                                            />
+                                                                        </button>
 
-                                                                        {/* Handle Subcategories (IT, DM, HR) vs Direct Items (Trainings) */}
-                                                                        {category.subCategories ? (
-                                                                            <div className="flex flex-col gap-3 pl-2 border-l border-white/10">
-                                                                                {category.subCategories.map((sub, subIdx) => (
-                                                                                    <div key={subIdx} className="space-y-2">
-                                                                                        <h5 className="text-white text-[11px] font-bold uppercase tracking-wide opacity-70 pl-2">
-                                                                                            {sub.name}
-                                                                                        </h5>
-                                                                                        <div className="flex flex-col gap-1 pl-3">
-                                                                                            {sub.items.map((item, itemIdx) => (
-                                                                                                <Link
-                                                                                                    key={itemIdx}
-                                                                                                    to={item.path}
-                                                                                                    onClick={() => setIsOpen(false)}
-                                                                                                    className="text-slate-300 hover:text-white text-xs font-medium py-1.5 transition-colors flex items-center gap-2"
-                                                                                                >
-                                                                                                    <div className="w-1 h-1 rounded-full bg-slate-600"></div>
-                                                                                                    {item.name}
-                                                                                                </Link>
-                                                                                            ))}
-                                                                                        </div>
+                                                                        {/* Level 2 Content: Subcategories */}
+                                                                        <AnimatePresence>
+                                                                            {expandedCategory === idx && (
+                                                                                <motion.div
+                                                                                    initial={{ height: 0, opacity: 0 }}
+                                                                                    animate={{ height: "auto", opacity: 1 }}
+                                                                                    exit={{ height: 0, opacity: 0 }}
+                                                                                    className="overflow-hidden"
+                                                                                >
+                                                                                    <div className="pl-2 pb-2 space-y-1">
+                                                                                        {category.subCategories ? (
+                                                                                            category.subCategories.map((sub, subIdx) => (
+                                                                                                <div key={subIdx} className="bg-[#051130] rounded-lg overflow-hidden mb-1">
+                                                                                                    {/* Level 3: Subcategory Header (e.g. Web Development) */}
+                                                                                                    <button
+                                                                                                        onClick={() => setExpandedSubCategory(expandedSubCategory === subIdx ? null : subIdx)}
+                                                                                                        className="w-full flex items-center justify-between px-4 py-3 text-[10px] font-bold uppercase tracking-wide text-slate-300 hover:text-white hover:bg-white/5 transition-all"
+                                                                                                    >
+                                                                                                        {sub.name}
+                                                                                                        <ChevronDown
+                                                                                                            size={12}
+                                                                                                            className={`transition-transform duration-300 ${expandedSubCategory === subIdx ? 'rotate-180 text-blue-400' : 'text-slate-500'}`}
+                                                                                                        />
+                                                                                                    </button>
+
+                                                                                                    {/* Level 3 Content: Items */}
+                                                                                                    <AnimatePresence>
+                                                                                                        {expandedSubCategory === subIdx && (
+                                                                                                            <motion.div
+                                                                                                                initial={{ height: 0 }}
+                                                                                                                animate={{ height: "auto" }}
+                                                                                                                exit={{ height: 0 }}
+                                                                                                                className="bg-[#03091e]"
+                                                                                                            >
+                                                                                                                <div className="flex flex-col py-2 px-4 gap-1">
+                                                                                                                    {sub.items.map((item, itemIdx) => (
+                                                                                                                        <Link
+                                                                                                                            key={itemIdx}
+                                                                                                                            to={item.path}
+                                                                                                                            onClick={() => setIsOpen(false)}
+                                                                                                                            className="flex items-center gap-2 text-slate-400 hover:text-blue-300 text-xs py-2 pl-2 border-l border-white/5 hover:border-blue-500/50 transition-all"
+                                                                                                                        >
+                                                                                                                            {item.name}
+                                                                                                                        </Link>
+                                                                                                                    ))}
+                                                                                                                </div>
+                                                                                                            </motion.div>
+                                                                                                        )}
+                                                                                                    </AnimatePresence>
+                                                                                                </div>
+                                                                                            ))
+                                                                                        ) : (
+                                                                                            <div className="flex flex-col gap-1 pl-4 pb-2">
+                                                                                                {category.items?.map((item, itemIdx) => (
+                                                                                                    <Link
+                                                                                                        key={itemIdx}
+                                                                                                        to={item.path}
+                                                                                                        onClick={() => setIsOpen(false)}
+                                                                                                        className="text-slate-400 hover:text-white text-xs font-medium py-1.5 transition-colors flex items-center gap-2"
+                                                                                                    >
+                                                                                                        {item.name}
+                                                                                                    </Link>
+                                                                                                ))}
+                                                                                            </div>
+                                                                                        )}
                                                                                     </div>
-                                                                                ))}
-                                                                            </div>
-                                                                        ) : (
-                                                                            <div className="flex flex-col gap-1 border-l border-white/10 pl-3">
-                                                                                {category.items?.map((item, itemIdx) => (
-                                                                                    <Link
-                                                                                        key={itemIdx}
-                                                                                        to={item.path}
-                                                                                        onClick={() => setIsOpen(false)}
-                                                                                        className="text-slate-300 hover:text-white text-xs font-medium py-1.5 transition-colors flex items-center gap-2"
-                                                                                    >
-                                                                                        <item.icon size={14} className="text-slate-500" />
-                                                                                        {item.name}
-                                                                                    </Link>
-                                                                                ))}
-                                                                            </div>
-                                                                        )}
+                                                                                </motion.div>
+                                                                            )}
+                                                                        </AnimatePresence>
                                                                     </div>
                                                                 ))}
                                                             </div>
