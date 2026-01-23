@@ -18,41 +18,13 @@ const ProcessWaveBackground = () => {
     }, []);
 
     // Generate path data for a sine wave
-    const generateWavePath = () => {
-        if (width === 0) return "";
 
-        // Settings
-        const steps = 6;
-        const amplitude = 30; // Height of the wave
-        const frequency = (Math.PI * 2 * (steps - 1)) / width; // Adjust cycles to fit steps
-
-        // We want the wave to pass through the specific center points of the 6 steps
-        // The steps are distributed `grid-cols-6`. So centers are at (index + 0.5) * (width / 6)
-
-        let path = `M 0 ${50}`; // Start middle-left
-
-        // Create a smooth curve
-        for (let x = 0; x <= width; x += 5) {
-            // Simple Sine wave: y = amplitude * sin(frequency * x) + center_y
-            // We want it to oscillate.
-            // Let's rely on a simpler visual wave for now that just looks "techy"
-            const y = 50 + amplitude * Math.sin(x * 0.02); // 0.02 is arbitrary freq
-            path += ` L ${x} ${y}`;
-        }
-
-        return path;
-    };
 
     // Better approach: Bezier curves connecting the step centers
     const generateConnectedPath = () => {
         if (width === 0) return "";
-        const stepWidth = width / 6;
-        const centers = Array.from({ length: 6 }).map((_, i) => ({
-            x: stepWidth * i + stepWidth / 2,
-            y: 50 + (i % 2 === 0 ? -20 : 20) // Alternate up and down slightly or just keep straight?
-            // The prompt says "sine wave connecting multiple data points".
-            // Let's make it a sine wave that generally aligns.
-        }));
+
+
 
         let d = `M 0 50`;
 

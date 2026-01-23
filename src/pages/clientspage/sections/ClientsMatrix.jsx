@@ -20,7 +20,7 @@ const ClientsMatrix = () => {
                         viewport={{ once: true }}
                     >
                         <span className="text-violet-600 font-bold tracking-[0.2em] uppercase text-xs mb-4 block animate-pulse">
-                            /// CAPABILITY_MATRIX_INIT
+                            {"/// CAPABILITY_MATRIX_INIT"}
                         </span>
                         <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tighter">
                             Strategic <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 via-fuchsia-600 to-purple-600">Capabilities.</span>

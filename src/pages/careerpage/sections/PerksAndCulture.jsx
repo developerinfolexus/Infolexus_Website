@@ -42,7 +42,7 @@ const PerksAndCulture = () => {
                 Why Join Us?
             </h2>
             <p className="text-slate-500 mb-8">
-                It's not just a job. It's an adventure.
+                It&apos;s not just a job. It&apos;s an adventure.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

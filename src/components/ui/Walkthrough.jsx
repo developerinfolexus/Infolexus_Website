@@ -8,7 +8,7 @@ const Walkthrough = ({ onComplete }) => {
     useEffect(() => {
         const video = videoRef.current;
         if (video) {
-            video.play().catch(error => {
+            video.play().catch(() => {
                 // Autoplay failed - usually due to browser policy. 
                 // We just proceed since we have muted autoplay.
             });

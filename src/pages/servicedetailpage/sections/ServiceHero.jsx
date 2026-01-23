@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { motion as Motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
-const ServiceHero = ({ service, id }) => {
+const ServiceHero = ({ service }) => {
     return (
         <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-slate-950 pt-20">
             {/* Background Image & Overlays matching Tech/DM Hero style */}
@@ -25,7 +24,7 @@ const ServiceHero = ({ service, id }) => {
                 <div className="max-w-4xl">
                     {/* Back to Services link removed */}
 
-                    <motion.div
+                    <Motion.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
@@ -47,16 +46,16 @@ const ServiceHero = ({ service, id }) => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-start gap-6">
-                            <motion.button
+                            <Motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => document.getElementById('details').scrollIntoView({ behavior: 'smooth' })}
                                 className="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-blue-600 hover:to-indigo-500 text-white font-bold transition-all shadow-lg shadow-indigo-500/25 flex items-center gap-3"
                             >
                                 Explore Details <ArrowRight size={20} />
-                            </motion.button>
+                            </Motion.button>
                         </div>
-                    </motion.div>
+                    </Motion.div>
                 </div>
             </div>
         </section>

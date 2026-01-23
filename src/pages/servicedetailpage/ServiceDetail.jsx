@@ -23,7 +23,7 @@ const ServiceDetail = () => {
             <div className="min-h-screen flex items-center justify-center bg-slate-50">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold text-slate-900 mb-4">Service Not Found</h2>
-                    <p className="text-slate-500 mb-8">The requested service ID "{id}" does not exist.</p>
+                    <p className="text-slate-500 mb-8">The requested service ID &quot;{id}&quot; does not exist.</p>
                     <Link to="/services" className="text-blue-600 hover:underline flex items-center gap-2 justify-center">
                         <ArrowLeft size={20} /> Back to Services
                     </Link>
@@ -42,7 +42,7 @@ const ServiceDetail = () => {
                     <ServiceRoadmap service={service} />
 
                     {/* Render Sub-Services if they exist */}
-                    {service.subServices && service.subServices.map((subId, index) => {
+                    {service.subServices && service.subServices.map((subId) => {
                         const subService = serviceDetails[subId];
                         if (!subService) return null;
 

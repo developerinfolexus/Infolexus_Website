@@ -64,7 +64,7 @@ const ClientMarquee = () => {
                 <div className="absolute top-0 right-0 w-24 h-full bg-gradient-to-l from-white to-transparent z-10"></div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes marquee {
                     0% { transform: translateX(0); }
                     100% { transform: translateX(-50%); }

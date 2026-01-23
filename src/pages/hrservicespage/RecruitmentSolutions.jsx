@@ -193,7 +193,7 @@ const RecruitmentSolutions = () => {
                 <div className="container mx-auto px-4 text-center relative z-10">
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Build Your Dream Team</h2>
                     <p className="text-slate-300 text-lg max-w-2xl mx-auto mb-10">
-                        Connect with us to find the perfect talent for your organization's needs.
+                        Connect with us to find the perfect talent for your organization&apos;s needs.
                     </p>
                     <button
                         onClick={() => setIsModalOpen(true)}

@@ -1,16 +1,14 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { ArrowRight, MessageSquareCode, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ClientsCTA = () => {
     const ref = useRef(null);
-    const { scrollYProgress } = useScroll({
+    useScroll({
         target: ref,
         offset: ["start end", "end start"]
     });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
     return (
         <section ref={ref} className="relative w-full overflow-hidden bg-[#081A4A] border-t border-white/5">
@@ -18,7 +16,7 @@ const ClientsCTA = () => {
 
             <div className="container mx-auto px-4 md:px-6 relative z-10 py-20 md:py-24 text-center">
                 {/* Decorative Quote Mark */}
-                <div className="absolute top-4 left-4 md:left-[10%] text-[8rem] md:text-[12rem] leading-none font-serif text-brand-blue/5 select-none pointer-events-none">"</div>
+                <div className="absolute top-4 left-4 md:left-[10%] text-[8rem] md:text-[12rem] leading-none font-serif text-brand-blue/5 select-none pointer-events-none">&quot;</div>
 
                 <div className="max-w-5xl mx-auto relative">
                     <motion.div
@@ -38,7 +36,7 @@ const ClientsCTA = () => {
                         viewport={{ once: true }}
                         className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 [word-spacing:15px] leading-[1.1]"
                     >
-                        "The gap between <span className="text-cyan-400 italic px-2">Idea</span> and <span className="text-cyan-400 italic px-2">Impact</span> is Execution."
+                        &quot;The gap between <span className="text-cyan-400 italic px-2">Idea</span> and <span className="text-cyan-400 italic px-2">Impact</span> is Execution.&quot;
                     </motion.h2>
 
                     <motion.p
@@ -48,7 +46,7 @@ const ClientsCTA = () => {
                         transition={{ delay: 0.1 }}
                         className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light"
                     >
-                        Don't let your vision stay a concept. We engineer the software that defines your industry's future.
+                        Don&apos;t let your vision stay a concept. We engineer the software that defines your industry&apos;s future.
                         <span className="block mt-2 text-white font-medium">Scalable. Secure. Delivered at Speed.</span>
                     </motion.p>
 

@@ -41,7 +41,7 @@ const TechHero = () => {
                     </h1>
 
                     <p className="text-xl text-slate-400 leading-relaxed mb-8 max-w-xl">
-                        We don't just write code. We engineer future-proof solutions using the most advanced and reliable technologies available today.
+                        We don&apos;t just write code. We engineer future-proof solutions using the most advanced and reliable technologies available today.
                     </p>
 
                     <div className="flex gap-4">

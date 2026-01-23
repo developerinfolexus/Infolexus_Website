@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import { ArrowRight, Code2 } from 'lucide-react';
 import deplonoixImg from '../../../assets/DEPLONOIX.png';
 import dpImg from '../../../assets/dp.png';
@@ -33,8 +33,8 @@ const projects = [
         stack: ['Python', 'TensorFlow', 'PyTorch', 'React', 'OpenCV'],
         image: {
             desktop: diseaseDesktopImg,
-            tablet: { src: diseaseTabletImg, className: 'scale-125' }, // Increased scale to fill frame
-            mobile: { src: diseaseMobileImg, className: 'scale-150' }  // Increased scale to crop borders
+            tablet: { src: diseaseTabletImg, className: 'scale-125' },
+            mobile: { src: diseaseMobileImg, className: 'scale-150' }
         },
         video: diseaseDetectionVideo,
         accent: 'text-emerald-500',
@@ -117,7 +117,7 @@ const projects = [
 
 const MultiDeviceMockup = ({ image, video }) => {
     const ref = useRef(null);
-    const { scrollYProgress } = useScroll({
+    useScroll({
         target: ref,
         offset: ["start end", "end start"]
     });
@@ -129,13 +129,9 @@ const MultiDeviceMockup = ({ image, video }) => {
         return { src: source, className: '' };
     };
 
-    const isMultiImage = typeof image === 'object' && !image.src; // Check if it's the config object {desktop:..., mobile:...} not the {src, className} object
+    const isMultiImage = typeof image === 'object' && !image.src;
 
-    // Desktop is usually just an image or video, assuming simple string for now unless extended, 
-    // but the project structure passes { desktop: ..., ... }
     const desktopRaw = isMultiImage ? image.desktop : image;
-    // Desktop usually doesn't need scaling fixes based on history, but let's be safe.
-    // For now keeping desktop logic simple as it wasn't the issue.
     const desktopSrc = typeof desktopRaw === 'object' && desktopRaw.src ? desktopRaw.src : desktopRaw;
 
     const tabletRaw = isMultiImage ? (image.tablet || image.mobile) : image;
@@ -143,9 +139,6 @@ const MultiDeviceMockup = ({ image, video }) => {
 
     const mobileRaw = isMultiImage ? (image.mobile || image.desktop) : image;
     const mobileData = resolveImage(mobileRaw);
-
-    // Parallax effect for screens
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
 
     return (
         <div ref={ref} className="relative w-full max-w-[700px] mx-auto h-[400px] md:h-[500px] flex items-end justify-center perspective-[1000px] group">
@@ -155,7 +148,7 @@ const MultiDeviceMockup = ({ image, video }) => {
                 {/* Screen Frame */}
                 <div className="bg-slate-900 rounded-t-xl p-[1px] md:p-[2px] shadow-2xl border border-slate-700 relative">
                     <div className="aspect-[16/9] bg-slate-950 rounded overflow-hidden relative group-hover:ring-2 ring-blue-500/20 transition-all">
-                        <motion.div className="w-full h-full relative">
+                        <div className="w-full h-full relative">
                             {video ? (
                                 <video src={video} className="w-full h-full object-cover object-top" autoPlay loop muted playsInline />
                             ) : (
@@ -166,7 +159,7 @@ const MultiDeviceMockup = ({ image, video }) => {
                                     style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
                                 />
                             )}
-                        </motion.div>
+                        </div>
                         {/* Glare */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none" />
                     </div>
@@ -188,7 +181,7 @@ const MultiDeviceMockup = ({ image, video }) => {
                 {/* Lid */}
                 <div className="bg-[#1a1a1a] rounded-t-lg p-[1px] shadow-2xl ring-1 ring-white/10">
                     <div className="aspect-[16/10] bg-black rounded-[2px] overflow-hidden relative">
-                        <motion.div className="w-full h-full relative">
+                        <div className="w-full h-full relative">
                             {video ? (
                                 <video src={video} className="w-full h-full object-cover object-top" autoPlay loop muted playsInline />
                             ) : (
@@ -199,7 +192,7 @@ const MultiDeviceMockup = ({ image, video }) => {
                                     style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
                                 />
                             )}
-                        </motion.div>
+                        </div>
                         <div className="absolute inset-0 bg-gradient-to-bl from-white/5 to-transparent pointer-events-none" />
                     </div>
                 </div>
@@ -215,14 +208,14 @@ const MultiDeviceMockup = ({ image, video }) => {
                 {/* Frame */}
                 <div className="bg-slate-800 rounded-[10%] p-[1px] shadow-xl border border-slate-600">
                     <div className="aspect-[3/4] bg-black rounded-[8%] overflow-hidden relative">
-                        <motion.div style={{ y: 0 }} className="w-full h-full relative">
+                        <div style={{ y: 0 }} className="w-full h-full relative">
                             <img
                                 src={tabletData.src}
                                 alt="Tablet"
                                 className={`w-full h-full object-cover will-change-transform ${tabletData.className || 'object-top'}`}
                                 style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
                             />
-                        </motion.div>
+                        </div>
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                     </div>
                 </div>
@@ -233,14 +226,14 @@ const MultiDeviceMockup = ({ image, video }) => {
             <div className="absolute right-[1%] md:right-[5%] bottom-[30px] md:bottom-[50px] w-[14%] md:w-[10%] z-30 transition-transform duration-700 group-hover:translate-x-6 group-hover:-rotate-3 hover:z-40">
                 <div className="bg-slate-900 rounded-[14%] p-[1px] shadow-lg border border-slate-700">
                     <div className="aspect-[9/19] bg-black rounded-[12%] overflow-hidden relative">
-                        <motion.div style={{ y: 0 }} className="w-full h-full relative">
+                        <div style={{ y: 0 }} className="w-full h-full relative">
                             <img
                                 src={mobileData.src}
                                 alt="Phone"
                                 className={`w-full h-full object-cover will-change-transform ${mobileData.className || 'object-top'}`}
                                 style={{ imageRendering: 'high-quality', backfaceVisibility: 'hidden' }}
                             />
-                        </motion.div>
+                        </div>
                         {/* Notch */}
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-black rounded-b-sm"></div>
                     </div>
@@ -260,7 +253,7 @@ const ProjectCard = ({ project, index }) => {
         <motion.div
             initial={{ opacity: 0, x: isEven ? -100 : 100 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-20%" }} // trigger later when more visible
+            viewport={{ once: true, margin: "-20%" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-0 lg:gap-20 mb-24 last:mb-0`}
         >

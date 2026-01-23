@@ -35,7 +35,7 @@ const ClientsHero = () => {
                         </h1>
 
                         <p className="text-xl text-slate-200 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
-                            Infolexus is the robust development partner you've been looking for. We deliver scalable, stunning, and efficient digital products tailored to your business goals.
+                            Infolexus is the robust development partner you&apos;ve been looking for. We deliver scalable, stunning, and efficient digital products tailored to your business goals.
                         </p>
 
                         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">

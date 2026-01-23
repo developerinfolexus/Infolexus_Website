@@ -66,11 +66,11 @@ const GlobalFootprint = () => {
                             Your Team, <br /> Just <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Digital.</span>
                         </h2>
                         <p className="text-slate-500 font-medium leading-relaxed mb-8 text-lg">
-                            We ditched the corporate boardrooms for agile remote workflows. Whether you're in San Francisco or Singapore, we work as if we're sitting right next to you.
+                            We ditched the corporate boardrooms for agile remote workflows. Whether you&apos;re in San Francisco or Singapore, we work as if we&apos;re sitting right next to you.
                         </p>
 
                         <p className="text-slate-500 font-medium leading-relaxed mb-8">
-                            No layers of management. No "let me check with my supervisor". Just direct access to the engineers building your future.
+                            No layers of management. No &quot;let me check with my supervisor&quot;. Just direct access to the engineers building your future.
                         </p>
                     </div>
                 </div>

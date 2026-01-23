@@ -86,7 +86,7 @@ const TechSphere = ({ color = "#00f2ff", size = 400 }) => {
 
             // Draw Particles
             particles.forEach(p => {
-                const alpha = Math.max(0.1, p.scale);
+
                 ctx.fillStyle = color;
                 ctx.globalAlpha = p.scale > 1 ? 1 : p.scale * 0.8; // dim back particles
                 ctx.beginPath();

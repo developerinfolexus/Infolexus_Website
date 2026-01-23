@@ -26,7 +26,7 @@ const HRHero = ({ onEnquire }) => {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
                     <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-8 leading-tight tracking-tight drop-shadow-2xl">
-                        The Job You've Always Dreamt <br className="hidden md:block" />
+                        The Job You&apos;ve Always Dreamt <br className="hidden md:block" />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">Is Just One Click Away!</span>
                     </h1>
                     <p className="text-lg md:text-2xl text-slate-300 max-w-4xl mx-auto font-light leading-relaxed mb-10">

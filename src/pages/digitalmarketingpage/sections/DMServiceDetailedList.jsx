@@ -47,7 +47,7 @@ const DMServiceDetailedList = ({ services }) => {
                                     {service.title}
                                 </h2>
                                 <h3 className="text-xl text-slate-700 font-medium mb-6 italic">
-                                    "{service.subtitle}"
+                                    &quot;{service.subtitle}&quot;
                                 </h3>
                                 <p className="text-slate-600 text-lg leading-relaxed mb-8 text-justify whitespace-pre-line">
                                     {service.description}

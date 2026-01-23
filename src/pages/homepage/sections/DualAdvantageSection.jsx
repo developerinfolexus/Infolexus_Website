@@ -58,7 +58,7 @@ const DualAdvantageSection = () => {
                         Architecting <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Digital Futures</span>
                     </h2>
                     <p className="text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed">
-                        We leverage cutting-edge technology and elite talent to deliver scalable, high-impact solutions that redefine what's possible for your business.
+                        We leverage cutting-edge technology and elite talent to deliver scalable, high-impact solutions that redefine what&apos;s possible for your business.
                     </p>
                 </motion.div>
 

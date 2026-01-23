@@ -91,14 +91,15 @@ export default function ProcessSection() {
     const sectionRef = useRef(null);
 
     useEffect(() => {
+        const currentSectionRef = sectionRef.current;
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) setIsVisible(true);
             },
             { threshold: 0.1 }
         );
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
+        if (currentSectionRef) observer.observe(currentSectionRef);
+        return () => { if (currentSectionRef) observer.unobserve(currentSectionRef); };
     }, []);
 
     const toRad = (deg) => (deg * Math.PI) / 180;

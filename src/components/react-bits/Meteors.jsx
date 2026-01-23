@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { cn } from "../../lib/utils";
 
 export const Meteors = ({
     number = 20,
     className,
 }) => {
-    const meteors = new Array(number || 20).fill(true);
+    const [meteorStyles] = useState(() =>
+        new Array(number || 20).fill(true).map(() => ({
+            left: Math.floor(Math.random() * 800 - 400) + "px",
+            animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
+            animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
+        }))
+    );
+
     return (
         <>
-            {meteors.map((el, idx) => (
+            {meteorStyles.map((style, idx) => (
                 <span
                     key={"meteor" + idx}
                     className={cn(
@@ -18,9 +25,7 @@ export const Meteors = ({
                     )}
                     style={{
                         top: 0,
-                        left: Math.floor(Math.random() * (400 - -400) + -400) + "px",
-                        animationDelay: Math.random() * (0.8 - 0.2) + 0.2 + "s",
-                        animationDuration: Math.floor(Math.random() * (10 - 2) + 2) + "s",
+                        ...style
                     }}
                 ></span>
             ))}

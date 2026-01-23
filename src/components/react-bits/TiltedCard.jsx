@@ -1,5 +1,4 @@
-
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const TiltedCard = ({
@@ -24,8 +23,6 @@ const TiltedCard = ({
     const opacity = useSpring(0);
     const rotateFigcaption = useSpring(0, { stiffness: 350, damping: 30, mass: 1 });
 
-    const [lastY, setLastY] = useState(0);
-
     function handleMouse(e) {
         if (!ref.current) return;
 
@@ -44,7 +41,6 @@ const TiltedCard = ({
         // Calculate rotation for figcaption if tooltip is used
         const newY = yPct * -rotateAmplitude;
         rotateFigcaption.set(newY);
-        setLastY(newY);
 
         opacity.set(1);
     }

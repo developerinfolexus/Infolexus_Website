@@ -1,8 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Particles = ({
-    width,
-    height,
     particleCount = 50,
     lineDistance = 100,
     particleColor = 'rgba(6, 182, 212, 0.5)',
@@ -56,15 +54,13 @@ const Particles = ({
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
-                // Mouse Interaction
                 // Draw Particle
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
                 ctx.fillStyle = particleColor;
                 ctx.fill();
 
-                // Draw Connections
-                // 1. Particle to Particle
+                // Connections
                 for (let j = index + 1; j < particlesRef.current.length; j++) {
                     const p2 = particlesRef.current[j];
                     const dx = p.x - p2.x;
@@ -81,21 +77,14 @@ const Particles = ({
                     }
                 }
 
-                // 2. Particle to Mouse
+                // Particle to Mouse
                 const mdx = p.x - mouseRef.current.x;
                 const mdy = p.y - mouseRef.current.y;
                 const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
 
                 if (mDist < hoverDistance) {
-                    // Pull particle slightly towards mouse
-                    const force = (hoverDistance - mDist) / hoverDistance;
-                    // const mx = (mouseRef.current.x - p.x);
-                    // const my = (mouseRef.current.y - p.y);
-                    // p.vx += (mx / mDist) * force * 0.05;
-                    // p.vy += (my / mDist) * force * 0.05;
-
                     ctx.beginPath();
-                    ctx.strokeStyle = `rgba(34, 211, 238, ${1 - mDist / hoverDistance})`; // Bright Cyan
+                    ctx.strokeStyle = `rgba(34, 211, 238, ${1 - mDist / hoverDistance})`;
                     ctx.lineWidth = 1;
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(mouseRef.current.x, mouseRef.current.y);

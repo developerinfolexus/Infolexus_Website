@@ -76,8 +76,8 @@ const ApplicationForm = () => {
             } else {
                 throw new Error('Submission failed');
             }
-        } catch (error) {
-            // console.error('Failed to send email:', error);
+        } catch {
+            // console.error('Failed to send email:');
             setSubmitStatus('error');
             setIsSubmitting(false);
         }
@@ -93,7 +93,7 @@ const ApplicationForm = () => {
                     <CheckCircle size={20} />
                     <div>
                         <p className="font-bold">Application Sent!</p>
-                        <p className="text-sm">We've received your details and will contact you soon.</p>
+                        <p className="text-sm">We&apos;ve received your details and will contact you soon.</p>
                     </div>
                 </div>
             )}

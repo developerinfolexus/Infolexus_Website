@@ -58,8 +58,8 @@ const ContactFormSection = () => {
             } else {
                 throw new Error('Submission failed');
             }
-        } catch (error) {
-            // console.error('Failed to send email:', error);
+        } catch {
+            // console.error('Failed to send email:');
             setSubmitStatus('error');
             setIsSubmitting(false);
         }
@@ -117,11 +117,10 @@ const ContactFormSection = () => {
 
                     <div className="mt-12">
                         <div className="w-20 h-1 bg-cyan-500 rounded-full mb-6"></div>
-                        <p className="text-slate-400 italic">"Technology is best when it brings people together."</p>
+                        <p className="text-slate-400 italic">&quot;Technology is best when it brings people together.&quot;</p>
                     </div>
                 </div>
 
-                {/* Contact Form */}
                 {/* Contact Form */}
                 <div className="p-10 md:p-12 md:w-3/5 bg-white">
                     <h2 className="text-2xl font-bold text-slate-900 mb-6">Send us a Message</h2>
@@ -131,7 +130,7 @@ const ContactFormSection = () => {
                             <CheckCircle size={20} />
                             <div>
                                 <p className="font-bold">Message Sent!</p>
-                                <p className="text-sm">We've received your inquiry and will contact you soon.</p>
+                                <p className="text-sm">We&apos;ve received your inquiry and will contact you soon.</p>
                             </div>
                         </div>
                     )}

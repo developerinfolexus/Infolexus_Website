@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import DecryptedText from '../../../components/react-bits/DecryptedText';
@@ -52,21 +52,21 @@ const testimonials = [
 const Testimonials = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    const handleNext = useCallback(() => {
+        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, []);
+
+    const handlePrev = useCallback(() => {
+        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    }, []);
+
     // Auto-swipe
     useEffect(() => {
         const interval = setInterval(() => {
             handleNext();
         }, 6000);
         return () => clearInterval(interval);
-    }, [currentIndex]);
-
-    const handleNext = () => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    };
+    }, [handleNext]);
 
     const currentTestimonial = testimonials[currentIndex];
 
@@ -127,7 +127,7 @@ const Testimonials = () => {
                             >
                                 <div className="min-h-[120px] flex items-center mb-10">
                                     <h3 className="text-lg md:text-2xl font-medium leading-relaxed text-slate-900">
-                                        "{currentTestimonial.content}"
+                                        &quot;{currentTestimonial.content}&quot;
                                     </h3>
                                 </div>
 

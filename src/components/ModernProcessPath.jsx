@@ -1,12 +1,9 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 // Import local assets for Services page
-import discoveryImg from '../assets/process-icons/discovery.png';
 import strategyImg from '../assets/process-icons/strategy.png';
 import executionImg from '../assets/process-icons/execution.png';
-import deliveryImg from '../assets/process-icons/delivery.png';
-import supportImg from '../assets/process-icons/support.png';
 
 // New relatable images
 import whyDataImg from '../assets/why-data.png';

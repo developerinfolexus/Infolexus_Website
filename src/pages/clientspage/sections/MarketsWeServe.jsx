@@ -72,7 +72,7 @@ const SpotlightCard = ({ children, className = "", spotlightColor = "rgba(59, 13
     );
 };
 
-const MarketCard = ({ market, index }) => {
+const MarketCard = ({ market }) => {
     const [isHovered, setIsHovered] = useState(false);
     const iconAnim = getIconAnimation();
 
@@ -238,7 +238,7 @@ const MarketsWeServe = () => {
                             viewport={{ once: true }}
                             className="h-full"
                         >
-                            <MarketCard market={market} index={idx} />
+                            <MarketCard market={market} />
                         </motion.div>
                     ))}
                 </div>

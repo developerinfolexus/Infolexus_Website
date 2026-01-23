@@ -43,10 +43,12 @@ const Navbar = () => {
 
     // Close menus and Scroll to Top on route change
     useEffect(() => {
-        setActiveDropdown(null);
-        setMobileSubMenuOpen(false);
-        setIsOpen(false);
-        window.scrollTo(0, 0);
+        requestAnimationFrame(() => {
+            setActiveDropdown(null);
+            setMobileSubMenuOpen(false);
+            setIsOpen(false);
+            window.scrollTo(0, 0);
+        });
     }, [location]);
 
     // Prevent Background Scroll when Mobile Menu is Open

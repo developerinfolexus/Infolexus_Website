@@ -30,7 +30,7 @@ const WhoWeAre = () => {
                                 <span className="font-semibold text-slate-800">Infolexus</span> is more than just an IT company—we are a catalyst for change. By fusing <span className="font-semibold text-blue-600">cutting-edge technology</span> with <span className="font-semibold text-purple-600">human-centric talent solutions</span>, we empower businesses to navigate the complexities of the digital age with confidence and agility.
                             </p>
                             <p>
-                                Our holistic approach bridges the gap between ambitious vision and tangible reality. From engineering scalable <strong className="text-slate-800">Enterprise Software</strong> to curating high-performance teams through our <strong className="text-slate-800">Staffing & Recruitment</strong> expertise, we don't just deliver services—we deliver growth, efficiency, and a competitive edge that lasts.
+                                Our holistic approach bridges the gap between ambitious vision and tangible reality. From engineering scalable <strong className="text-slate-800">Enterprise Software</strong> to curating high-performance teams through our <strong className="text-slate-800">Staffing & Recruitment</strong> expertise, we don&apos;t just deliver services—we deliver growth, efficiency, and a competitive edge that lasts.
                             </p>
                         </div>
 

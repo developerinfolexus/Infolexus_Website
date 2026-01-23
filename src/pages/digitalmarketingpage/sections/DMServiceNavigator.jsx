@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+
 
 const DMServiceNavigator = ({ services }) => {
     const [activeId, setActiveId] = useState('');
@@ -51,8 +51,8 @@ const DMServiceNavigator = ({ services }) => {
                             key={service.id}
                             onClick={() => scrollToSection(service.id)}
                             className={`p-4 rounded-lg text-sm md:text-base font-semibold transition-all duration-300 border ${activeId === service.id
-                                    ? 'bg-blue-600 text-white border-blue-600 shadow-lg transform scale-105'
-                                    : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-blue-300 hover:bg-blue-50'
+                                ? 'bg-blue-600 text-white border-blue-600 shadow-lg transform scale-105'
+                                : 'bg-slate-50 text-slate-600 border-slate-200 hover:border-blue-300 hover:bg-blue-50'
                                 }`}
                         >
                             {service.title.split('(')[0].trim()} {/* Simplified Title */}

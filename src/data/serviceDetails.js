@@ -3,7 +3,7 @@ import uiuxImg from '../assets/uiux2.jpeg';
 import customWebImg from '../assets/custom.jpeg';
 import erpImg from '../assets/erp.jpeg';
 import dataAnalyticsImg from '../assets/dataanalystic.jpeg';
-import digitalMarketingImg from '../assets/digitalmarketing1.jpeg';
+
 import aiMlImg from '../assets/Ai&ml.jpeg';
 import webDevImg from '../assets/webimage.jpeg';
 import cloudImg from '../assets/abstract-background-of-digital-technologies-vector-56508182.avif';

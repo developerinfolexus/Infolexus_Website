@@ -120,7 +120,7 @@ const ServiceInquiryForm = ({ id, variant = 'default' }) => {
                 <div className="max-w-5xl mx-auto bg-white rounded-3xl p-8 md:p-12 text-slate-900 shadow-2xl">
                     {submitStatus === 'success' && (
                         <div className="mb-8 p-4 bg-green-50 text-green-700 rounded-xl text-center font-bold border border-green-200">
-                            Registration Successful! We'll contact you shortly.
+                            Registration Successful! We&apos;ll contact you shortly.
                         </div>
                     )}
                     {submitStatus === 'error' && (

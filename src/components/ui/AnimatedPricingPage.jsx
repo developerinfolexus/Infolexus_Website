@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, Monitor, Layers, PhoneCall, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Monitor, Layers, ArrowRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 // --- Pricing Data ---
@@ -41,14 +41,23 @@ const PricingCard = ({ type, mode }) => {
     const [displayData, setDisplayData] = useState(pricingData[mode][type]);
     const [isAnimating, setIsAnimating] = useState(false);
 
-    useEffect(() => {
+    // Track previous mode/type to trigger animation when they change
+    const [prevProps, setPrevProps] = useState({ mode, type });
+
+    if (mode !== prevProps.mode || type !== prevProps.type) {
+        setPrevProps({ mode, type });
         setIsAnimating(true);
-        const timer = setTimeout(() => {
-            setDisplayData(pricingData[mode][type]);
-            setIsAnimating(false);
-        }, 200); // 200ms delay to match valid transition time
-        return () => clearTimeout(timer);
-    }, [mode, type]);
+    }
+
+    useEffect(() => {
+        if (isAnimating) {
+            const timer = setTimeout(() => {
+                setDisplayData(pricingData[mode][type]);
+                setIsAnimating(false);
+            }, 200);
+            return () => clearTimeout(timer);
+        }
+    }, [isAnimating, mode, type]);
 
     const cardBgClass = isLanding
         ? 'bg-gradient-to-br from-blue-900/40 via-blue-950/20 to-transparent border-blue-500/30 shadow-blue-900/20'
@@ -66,7 +75,6 @@ const PricingCard = ({ type, mode }) => {
         <div className={cn(
             "relative w-full rounded-3xl border backdrop-blur-xl transition-all duration-500 overflow-hidden shadow-2xl group",
             cardBgClass,
-            // Size constraints (keeping roughly similar to original request logic, but responsive)
             "min-h-[600px] hover:scale-[1.01]"
         )}>
             {/* Ambient Glow */}
@@ -87,6 +95,7 @@ const PricingCard = ({ type, mode }) => {
                     <AnimatePresence mode="wait">
                         {!isAnimating && (
                             <motion.div
+                                key={displayData.price}
                                 initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
                                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                                 exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
@@ -109,6 +118,7 @@ const PricingCard = ({ type, mode }) => {
                     <AnimatePresence mode="wait">
                         {!isAnimating && (
                             <motion.p
+                                key={displayData.description}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
