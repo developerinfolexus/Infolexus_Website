@@ -5,6 +5,7 @@ import { X, Send, Upload, CheckCircle, AlertCircle, Loader2 } from 'lucide-react
 const HRInquiryModal = ({ isOpen, onClose, initialCategory = 'Job Seeker', initialSubject = '' }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+    const [resumeFile, setResumeFile] = useState(null);
     const [fileName, setFileName] = useState('');
 
     // Form State
@@ -31,6 +32,7 @@ const HRInquiryModal = ({ isOpen, onClose, initialCategory = 'Job Seeker', initi
                 message: initialSubject ? `Inquiry regarding: ${initialSubject}` : ''
             }));
             setSubmitStatus(null);
+            setResumeFile(null);
             setFileName('');
         }
     }, [isOpen, initialCategory, initialSubject]);
@@ -41,6 +43,7 @@ const HRInquiryModal = ({ isOpen, onClose, initialCategory = 'Job Seeker', initi
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
+            setResumeFile(e.target.files[0]);
             setFileName(e.target.files[0].name);
         }
     };
@@ -53,20 +56,42 @@ const HRInquiryModal = ({ isOpen, onClose, initialCategory = 'Job Seeker', initi
         const endpoint = "https://formsubmit.co/ajax/support@infolexus.com";
 
         try {
+            // Create FormData object to support file uploads
+            const formDataToSend = new FormData();
+
+            // Add form fields
+            formDataToSend.append('_subject', `Infolexus - HR Inquiry: ${formData.category} - ${formData.name}`);
+            formDataToSend.append('name', formData.name);
+            formDataToSend.append('email', formData.email);
+            formDataToSend.append('phone', formData.phone);
+            formDataToSend.append('category', formData.category);
+
+            // Add category-specific fields
+            if (formData.category === 'Job Seeker') {
+                if (formData.qualification) formDataToSend.append('qualification', formData.qualification);
+                if (formData.experience) formDataToSend.append('experience', formData.experience);
+            } else {
+                if (formData.organization) formDataToSend.append('organization', formData.organization);
+            }
+
+            formDataToSend.append('message', formData.message);
+
+            // Add the resume file if present
+            if (resumeFile) {
+                formDataToSend.append('attachment', resumeFile);
+            }
+
+            // FormSubmit configuration
+            formDataToSend.append('_template', 'table');
+            formDataToSend.append('_captcha', 'false');
+            formDataToSend.append('_autoresponse', 'Thank you for your inquiry to Infolexus. Our team will contact you shortly.');
+
             const response = await fetch(endpoint, {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify({
-                    _subject: `New HR Inquiry: ${formData.category} - ${formData.name}`,
-                    ...formData,
-                    resume_status: fileName ? `Attached: ${fileName}` : 'No resume attached',
-                    _template: 'table',
-                    _captcha: "false",
-                    _autoresponse: "Thank you for your inquiry. Our team will contact you shortly."
-                })
+                body: formDataToSend
             });
 
             if (response.ok) {

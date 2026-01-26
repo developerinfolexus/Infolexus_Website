@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+    const [resumeFile, setResumeFile] = useState(null);
+
     const [formData, setFormData] = useState({
         // Common
         name: '',
@@ -34,74 +36,109 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setResumeFile(e.target.files[0]);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitStatus(null);
 
-        // Prepare data for submission
-        let submissionData = {
-            _subject: `New Inquiry (${type === 'placement' ? 'Placement Support' : 'Recruitment'})`,
-            name: formData.name,
-            mobile: formData.mobile,
-            email: formData.email,
-        };
-
-        if (type === 'placement') {
-            submissionData = {
-                ...submissionData,
-                college: formData.college,
-                degree: formData.degree === 'Others' ? formData.customDegree : formData.degree,
-                yearOfPassing: formData.year === 'Others' ? formData.customYear : formData.year,
-                interestedCourse: formData.course === 'Others' ? formData.customCourse : formData.course,
-                learningMode: formData.learningMode,
-                currentStatus: formData.currentStatus,
-                experience: formData.experience
-            };
-        } else {
-            submissionData = {
-                ...submissionData,
-                companyName: formData.companyName,
-                requirementType: formData.requirementType,
-                message: formData.message
-            };
-        }
-
-        // Add standard formsubmit fields
-        submissionData._template = 'table';
-        submissionData._captcha = 'false';
-        submissionData._autoresponse = "Thank you for enquiring with Infolexus. We'll be in touch shortly.";
-
         try {
-            const response = await fetch("https://formsubmit.co/ajax/support@infolexus.com", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(submissionData)
-            });
+            if (type === 'placement') {
+                const formDataToSend = new FormData();
+                formDataToSend.append('name', formData.name);
+                formDataToSend.append('email', formData.email);
+                formDataToSend.append('phone', formData.mobile);
+                formDataToSend.append('position', 'Placement Candidate');
 
-            if (response.ok) {
-                setSubmitStatus('success');
-                setTimeout(() => {
-                    onClose();
-                    setSubmitStatus(null);
-                    setFormData({ // Reset form
-                        name: '', mobile: '', email: '', college: '', degree: '', customDegree: '',
-                        year: '', customYear: '', course: '', customCourse: '',
-                        learningMode: 'Online', currentStatus: 'Fresher', experience: '',
-                        companyName: '', requirementType: '', message: ''
-                    });
-                }, 2000);
+                // Add specific fields
+                formDataToSend.append('College', formData.college);
+                formDataToSend.append('Degree', formData.degree === 'Others' ? formData.customDegree : formData.degree);
+                formDataToSend.append('PassingYear', formData.year === 'Others' ? formData.customYear : formData.year);
+                formDataToSend.append('InterestedCourse', formData.course === 'Others' ? formData.customCourse : formData.course);
+                formDataToSend.append('LearningMode', formData.learningMode);
+                formDataToSend.append('CurrentStatus', formData.currentStatus);
+                formDataToSend.append('ExperienceDetails', formData.experience);
+
+                if (resumeFile) {
+                    formDataToSend.append('attachment', resumeFile);
+                }
+
+                // Use the proxied endpoint
+                const response = await fetch('/send-application', {
+                    method: 'POST',
+                    body: formDataToSend
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    if (result.success) {
+                        setSubmitStatus('success');
+                        setTimeout(() => {
+                            closeAndReset();
+                        }, 2000);
+                    } else {
+                        throw new Error(result.message);
+                    }
+                } else {
+                    throw new Error('Server error');
+                }
+
             } else {
-                setSubmitStatus('error');
+                // Keep original behavior for Recruitment or others
+                let submissionData = {
+                    _subject: `New Inquiry (${type === 'placement' ? 'Placement Support' : 'Recruitment'})`,
+                    name: formData.name,
+                    mobile: formData.mobile,
+                    email: formData.email,
+                    companyName: formData.companyName,
+                    requirementType: formData.requirementType,
+                    message: formData.message,
+                    _template: 'table',
+                    _captcha: 'false',
+                    _autoresponse: "Thank you for enquiring with Infolexus. We'll be in touch shortly."
+                };
+
+                const response = await fetch("https://formsubmit.co/ajax/support@infolexus.com", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(submissionData)
+                });
+
+                if (response.ok) {
+                    setSubmitStatus('success');
+                    setTimeout(() => {
+                        closeAndReset();
+                    }, 2000);
+                } else {
+                    setSubmitStatus('error');
+                }
             }
-        } catch {
+        } catch (error) {
+            console.error('Submission Error:', error);
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const closeAndReset = () => {
+        onClose();
+        setSubmitStatus(null);
+        setResumeFile(null);
+        setFormData({
+            name: '', mobile: '', email: '', college: '', degree: '', customDegree: '',
+            year: '', customYear: '', course: '', customCourse: '',
+            learningMode: 'Online', currentStatus: 'Fresher', experience: '',
+            companyName: '', requirementType: '', message: ''
+        });
     };
 
     // Options
@@ -133,10 +170,12 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                         {/* Header */}
                         <div className="bg-[#081A4A] px-6 py-4 flex justify-between items-center shrink-0">
                             <div>
-                                <h3 className="text-xl font-bold text-white">Enquire Now</h3>
+                                <h3 className="text-xl font-bold text-white">
+                                    {type === 'placement' ? 'Apply Now' : 'Enquire Now'}
+                                </h3>
                                 <p className="text-blue-200 text-sm">
                                     {type === 'placement'
-                                        ? "Register for our industry-leading upskilling courses."
+                                        ? "Start your career journey with us."
                                         : "Let us help you build your dream team."}
                                 </p>
                             </div>
@@ -150,8 +189,8 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                             {submitStatus === 'success' ? (
                                 <div className="flex flex-col items-center justify-center py-12 text-center text-green-600">
                                     <CheckCircle size={48} className="mb-4" />
-                                    <h4 className="text-xl font-bold">Enquiry Sent Successfully!</h4>
-                                    <p className="text-slate-600 mt-2">We will get back to you shortly.</p>
+                                    <h4 className="text-xl font-bold">Successfully Submitted!</h4>
+                                    <p className="text-slate-600 mt-2">We will review your application and contact you.</p>
                                 </div>
                             ) : submitStatus === 'error' ? (
                                 <div className="bg-red-50 text-red-600 p-4 rounded-xl mb-6 flex items-center gap-3">
@@ -161,7 +200,7 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                             ) : null}
 
                             {!submitStatus && (
-                                <form onSubmit={handleSubmit} className="space-y-4">
+                                <form onSubmit={handleSubmit} className="space-y-4" encType={type === 'placement' ? "multipart/form-data" : ""}>
                                     {/* Common Fields */}
                                     <div className="space-y-1">
                                         <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Full Name</label>
@@ -282,6 +321,23 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                                                 </div>
                                             </div>
 
+                                            {/* Resume Upload - Only for Placement */}
+                                            <div className="space-y-2 border-t border-dashed pt-4 mt-2">
+                                                <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Resume Upload (PDF/DOC)</label>
+                                                <input
+                                                    type="file"
+                                                    accept=".pdf,.doc,.docx"
+                                                    onChange={handleFileChange}
+                                                    className="block w-full text-sm text-slate-500
+                                                        file:mr-4 file:py-2 file:px-4
+                                                        file:rounded-full file:border-0
+                                                        file:text-xs file:font-semibold
+                                                        file:bg-indigo-50 file:text-indigo-700
+                                                        hover:file:bg-indigo-100
+                                                    "
+                                                />
+                                            </div>
+
                                             <div className="space-y-1">
                                                 <label className="text-xs font-bold text-slate-700 uppercase tracking-wide">Any Experience or Project? <span className="text-slate-400 normal-case font-normal">(Optional)</span></label>
                                                 <textarea
@@ -318,11 +374,6 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                                                     <input
                                                         name="customRequirement" placeholder="Specify Requirement"
                                                         className="mt-2 w-full px-4 py-2 rounded-lg border text-sm"
-                                                    // Note: I'm reusing the existing state structure effectively or adding ad-hoc if needed.
-                                                    // For simplicity, let's just assume customRequirement maps to message or similar in a real app, 
-                                                    // or ideally I should add it to state. I'll add handling logic in render but state needs it too.
-                                                    // Let's keep it simple: if "Others", just type it in message or handle it.
-                                                    // Actually, I'll just let them type it in the text box below if 'Others' is selected or handle it gracefully.
                                                     />
                                                 )}
                                             </div>
@@ -341,9 +392,13 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full bg-[#081A4A] text-white font-bold py-3.5 rounded-xl hover:bg-[#0d2a75] transition-all flex items-center justify-center gap-2 mt-4"
+                                        className="w-full bg-[#081A4A] text-white font-bold py-3.5 rounded-xl hover:bg-[#0d2a75] transition-all flex items-center justify-center gap-2 mt-6 shadow-lg shadow-indigo-900/10"
                                     >
-                                        {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <>Submit Inquiry <Send size={18} /></>}
+                                        {isSubmitting ? (
+                                            <span className="flex items-center gap-2"><Loader2 size={18} className="animate-spin" /> Processing...</span>
+                                        ) : (
+                                            <span className="flex items-center gap-2">{type === 'placement' ? 'Submit Application' : 'Submit Inquiry'} <Send size={18} /></span>
+                                        )}
                                     </button>
                                 </form>
                             )}

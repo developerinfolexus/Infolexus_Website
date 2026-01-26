@@ -5,6 +5,7 @@ const ApplicationForm = () => {
     const formRef = useRef();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+    const [resumeFile, setResumeFile] = useState(null);
     const [fileName, setFileName] = useState('');
 
     const [formData, setFormData] = useState({
@@ -24,6 +25,7 @@ const ApplicationForm = () => {
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
+            setResumeFile(e.target.files[0]);
             setFileName(e.target.files[0].name);
         }
     };
@@ -33,51 +35,60 @@ const ApplicationForm = () => {
         setIsSubmitting(true);
         setSubmitStatus(null);
 
-        // Using FormSubmit.co for free, simulated unlimited emails
-        // No API key required, just the destination email
-        // We use the /ajax endpoint to keep the user on our page (no redirect)
-        const endpoint = "https://formsubmit.co/ajax/mani@infolexus.com";
+        // Point to local backend (proxied by Vite)
+        const endpoint = "/send-application";
 
         try {
+            const formDataToSend = new FormData();
+
+            // Append basic fields
+            formDataToSend.append('name', formData.name);
+            formDataToSend.append('email', formData.email);
+            formDataToSend.append('phone', formData.phone);
+            formDataToSend.append('position', formData.position);
+            formDataToSend.append('experienceLevel', formData.experienceLevel);
+            if (formData.yearsOfExperience) formDataToSend.append('yearsOfExperience', formData.yearsOfExperience);
+            formDataToSend.append('message', formData.message);
+
+            // Append File
+            if (resumeFile) {
+                formDataToSend.append('attachment', resumeFile);
+            }
+
             const response = await fetch(endpoint, {
                 method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    _subject: `New Job Application: ${formData.position}`,
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    position: formData.position,
-                    message: formData.message,
-                    // Sending only the filename as this is a "demo" upload
-                    resume_status: fileName ? `Attached: ${fileName}` : 'No resume attached',
-                    _template: 'table', // FormSubmit formats it nicely in a table
-                    _captcha: "false", // Disable captcha for easier testing
-                    _autoresponse: "Thank you for your application. We will review it shortly." // Auto-reply to user
-                })
+                body: formDataToSend
             });
 
             if (response.ok) {
-                setSubmitStatus('success');
-                setIsSubmitting(false);
-                setFormData({
-                    name: '',
-                    email: '',
-                    phone: '',
-                    position: '',
-                    message: ''
-                });
-                setFileName('');
-                // Reset status after 5 seconds
-                setTimeout(() => setSubmitStatus(null), 5000);
+                const result = await response.json();
+                if (result.success) {
+                    setSubmitStatus('success');
+                    setIsSubmitting(false);
+                    setFormData({
+                        name: '',
+                        email: '',
+                        phone: '',
+                        position: '',
+                        message: '',
+                        experienceLevel: 'Fresher',
+                        yearsOfExperience: '',
+                        isCustomPosition: false
+                    });
+                    setResumeFile(null);
+                    setFileName('');
+                    // Reset file input manually
+                    if (e.target) e.target.reset();
+
+                    setTimeout(() => setSubmitStatus(null), 5000);
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
             } else {
-                throw new Error('Submission failed');
+                throw new Error('Server error');
             }
-        } catch {
-            // console.error('Failed to send email:');
+        } catch (error) {
+            console.error('Submission Error:', error);
             setSubmitStatus('error');
             setIsSubmitting(false);
         }
@@ -93,7 +104,7 @@ const ApplicationForm = () => {
                     <CheckCircle size={20} />
                     <div>
                         <p className="font-bold">Application Sent!</p>
-                        <p className="text-sm">We&apos;ve received your details and will contact you soon.</p>
+                        <p className="text-sm">We've received your details and will contact you soon.</p>
                     </div>
                 </div>
             )}
@@ -108,7 +119,7 @@ const ApplicationForm = () => {
                 </div>
             )}
 
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4" encType="multipart/form-data">
                 <div>
                     <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name</label>
                     <input
@@ -249,6 +260,7 @@ const ApplicationForm = () => {
                     <p className="text-xs text-slate-500 mb-2">Resume Upload (PDF)</p>
                     <input
                         type="file"
+                        name="attachment"
                         accept=".pdf,.doc,.docx"
                         onChange={handleFileChange}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"

@@ -29,7 +29,7 @@ const Footer = () => {
                         </Link>
                         <div className="md:pl-12">
                             <p className="text-slate-400 leading-relaxed mb-8">
-                                Infolexus is a premier technology partner <br /> delivering innovative IT solutions and strategic workforce management to global enterprises.
+                                Infolexus is a premier technology partner  delivering innovative IT solutions and strategic workforce management to global enterprises.<br />
                             </p>
                             <div className="flex gap-4 justify-center md:justify-start">
                                 {[

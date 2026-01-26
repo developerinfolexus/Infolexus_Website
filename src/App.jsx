@@ -24,11 +24,12 @@ const CollegeTrainings = lazy(() => import('./pages/trainingspage/CollegeTrainin
 const GraduateTrainings = lazy(() => import('./pages/trainingspage/GraduateTrainings'));
 const PlacementSupport = lazy(() => import('./pages/hrservicespage/PlacementSupport'));
 const RecruitmentSolutions = lazy(() => import('./pages/hrservicespage/RecruitmentSolutions'));
+const AdminApplications = lazy(() => import('./pages/admin/AdminApplications'));
 
 // Loading Fallback Component
 const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen bg-slate-50">
-    <Loader2 className="w-10 h-10 text-blue-600 animate-spin" />
+  <div className="flex items-center justify-center min-h-screen bg-black">
+    <Loader2 className="w-10 h-10 text-white animate-spin" />
   </div>
 );
 
@@ -68,6 +69,7 @@ function App() {
               <Route path="/careers" element={<Career />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/pricing" element={<PricingPage />} />
+              <Route path="/admin/applications" element={<AdminApplications />} />
             </Routes>
           </Suspense>
         </Layout>

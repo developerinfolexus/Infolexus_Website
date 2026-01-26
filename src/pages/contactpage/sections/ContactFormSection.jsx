@@ -23,7 +23,7 @@ const ContactFormSection = () => {
         setSubmitStatus(null);
 
         // Using FormSubmit.co
-        const endpoint = "https://formsubmit.co/ajax/support@infolexus.com";
+        const endpoint = "https://formsubmit.co/ajax/kumarsasi9081@gmail.com";
 
         try {
             const response = await fetch(endpoint, {
@@ -33,7 +33,7 @@ const ContactFormSection = () => {
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    _subject: `New Contact Inquiry: ${formData.subject}`,
+                    _subject: `New Contact Inquiry: ${formData.subject} [${new Date().toLocaleString()}]`,
                     name: formData.name,
                     email: formData.email,
                     subject: formData.subject,
