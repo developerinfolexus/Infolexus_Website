@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 // Middleware
 app.use(cors());
@@ -119,7 +120,7 @@ app.post('/send-application', upload.single('attachment'), async (req, res) => {
                     <p><strong>Position/Type:</strong> ${position || 'Student/Job Seeker'}</p>
                     ${otherFieldsHtml}
                     <p><strong>Message:</strong><br>${message || 'No message provided'}</p>
-                    ${applicationData.resumePath ? `<p><strong>Resume:</strong> <a href="http://localhost:${PORT}${applicationData.resumePath}">Download Resume</a></p>` : ''}
+                    ${applicationData.resumePath ? `<p><strong>Resume:</strong> <a href="${BASE_URL}${applicationData.resumePath}">Download Resume</a></p>` : ''}
                 `,
                 attachments: file ? [
                     {
