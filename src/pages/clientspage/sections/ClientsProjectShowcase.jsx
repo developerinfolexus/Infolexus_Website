@@ -15,6 +15,8 @@ import hrTabImg from '../../../assets/HRm-TAB.jpeg';
 import hrMobileImg from '../../../assets/HRM-MOBILE.jpeg';
 import erpEngImg from '../../../assets/ERP-ENG.png';
 import erpCpImg from '../../../assets/ERP-CP.png';
+import erpTabImg from '../../../assets/ERP-TAB.png';
+import erpMobileImg from '../../../assets/ERP-Moblie.png';
 import soapNotesImg from '../../../assets/soap_notes.png';
 import soapNotesVideo from '../../../assets/SOAP Notes Generator.mp4';
 import voiceDoctorVideo from '../../../assets/voice-booking.mp4';
@@ -101,9 +103,9 @@ const projects = [
         stack: ['React', 'Python', 'NumPy', 'Pandas', 'Tailwind', 'PostgreSQL'],
         image: {
             desktop: erpEngImg,
-            tablet: { src: erpEngImg, className: 'scale-125' },
+            tablet: { src: erpTabImg, className: 'object-top' },
             laptop: erpCpImg,
-            mobile: { src: erpCpImg, className: 'scale-150' }
+            mobile: { src: erpMobileImg, className: 'object-top' }
         },
         accent: 'text-orange-500',
         bgAccent: 'bg-orange-500/10',
