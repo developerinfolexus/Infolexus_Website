@@ -50,5 +50,40 @@
     "originalResumeName": "PRAKASH M__Resume.pdf",
     "date": "29 January 2026 at 03:42 pm",
     "dateISO": "2026-01-29T10:12:16.593Z"
+  },
+  {
+    "id": 1769682030250,
+    "name": "Sasikumar R",
+    "email": "kumarsasi9081@gmail.com",
+    "phone": "+919566726011",
+    "position": "HR Inquiry - Job Seeker",
+    "message": "Inquiry regarding: Industry-Oriented Technical Training",
+    "location": "coimbatore",
+    "category": "Job Seeker",
+    "recipientType": "mani",
+    "qualification": "BE-CSE",
+    "experience": "Fresher",
+    "resumePath": "/uploads/1769682030185-696169401-Sasikumar_R___Resume.pdf",
+    "originalResumeName": "Sasikumar R___Resume.pdf",
+    "date": "29 January 2026 at 03:50 pm",
+    "dateISO": "2026-01-29T10:20:30.250Z"
+  },
+  {
+    "id": 1769682081231,
+    "name": "Sasikumar R",
+    "email": "kumarsasi9081@gmail.com",
+    "phone": [
+      "+919566726011",
+      "+919566726011"
+    ],
+    "position": "UI/UX Designer",
+    "message": "",
+    "location": "coimbatore",
+    "experienceLevel": "Fresher",
+    "recipientType": "mani",
+    "resumePath": "/uploads/1769682081228-405322807-Sasikumar_R___Resume.pdf",
+    "originalResumeName": "Sasikumar R___Resume.pdf",
+    "date": "29 January 2026 at 03:51 pm",
+    "dateISO": "2026-01-29T10:21:21.231Z"
   }
 ]
