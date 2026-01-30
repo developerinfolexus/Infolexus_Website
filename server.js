@@ -105,7 +105,7 @@ app.post('/send-application', upload.single('attachment'), async (req, res) => {
 
         // Determine SMTP host - Use .env value or auto-detect
         // If MANI_EMAIL is a Google Workspace email, we must use smtp.gmail.com
-        const smtpHost = process.env.SMTP_HOST || (emailUser.includes('@gmail.com') ? 'smtp.gmail.com' : 'mail.infolexus.com');
+        const smtpHost = process.env.SMTP_HOST || (emailUser && emailUser.includes('@gmail.com') ? 'smtp.gmail.com' : 'mail.infolexus.com');
         const smtpPort = parseInt(process.env.SMTP_PORT) || 465;
 
         // Attempt to send email
