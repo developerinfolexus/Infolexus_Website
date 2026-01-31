@@ -183,7 +183,7 @@ app.post('/send-application', upload.single('attachment'), async (req, res) => {
                     attachments: file ? [
                         {
                             filename: sanitizedFilename,
-                            path: path.join(__dirname, file.path)
+                            path: file.path // Multer stores the full path or relative path correctly
                         }
                     ] : []
                 };
@@ -217,7 +217,7 @@ app.get('/api/applications', (req, res) => {
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Catch-all handler for React Routing
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
     const indexPath = path.join(__dirname, 'dist', 'index.html');
     if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
