@@ -8,7 +8,6 @@ const ContactFormSection = () => {
 
     const [formData, setFormData] = useState({
         name: '',
-        name: '',
         email: '',
         location: '',
         subject: '',
@@ -50,7 +49,6 @@ const ContactFormSection = () => {
                     setIsSubmitting(false);
                     setFormData({
                         name: '',
-                        email: '',
                         email: '',
                         location: '',
                         subject: '',
