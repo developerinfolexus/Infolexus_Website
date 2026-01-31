@@ -181,7 +181,7 @@ const techMap = {
     "Buffer": { icon: SiIcons.SiBuffer, color: "text-[#231F20]" },
     "Hootsuite": { icon: SiIcons.SiHootsuite, color: "text-[#000000]" },
     "Later": { icon: Calendar, color: "text-[#6C5CE7]" },
-    "Sprout Social": { icon: SiIcons.SiSproutsocial, color: "text-[#2DCC70]" },
+    "Sprout Social": { icon: SiIcons.SiSprout, color: "text-[#2DCC70]" },
     "Hotjar": { icon: SiIcons.SiHotjar, color: "text-[#FD3A5C]" },
     "Adobe Premiere": { icon: SiIcons.SiAdobepremierepro, color: "text-[#9999FF]" },
     "Premiere Pro": { icon: SiIcons.SiAdobepremierepro, color: "text-[#9999FF]" },

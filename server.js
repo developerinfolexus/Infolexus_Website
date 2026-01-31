@@ -25,7 +25,11 @@ const PORT = process.env.PORT || 5000;
 const BASE_URL = process.env.BASE_URL || `http://localhost:${PORT}`;
 
 // Middleware
-app.use(cors());
+// Middleware
+app.use(cors({
+    origin: ["https://infolexus.com", "http://localhost:5173", "http://localhost:4173"], // Allow production and local dev
+    credentials: true
+}));
 app.use(express.json());
 
 // Configure Multer for file uploads (Disk Storage)
