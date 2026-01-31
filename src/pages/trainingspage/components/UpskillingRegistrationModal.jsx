@@ -45,7 +45,7 @@ const UpskillingRegistrationModal = ({ isOpen, onClose, initialCourse = '' }) =>
         setIsSubmitting(true);
         setSubmitStatus(null);
 
-        const endpoint = "/send-application"; // Use our own backend
+        const endpoint = `${import.meta.env.VITE_API_BASE_URL}/send-application`; // Use our own backend
 
         try {
             const formDataToSend = new FormData();

@@ -25,7 +25,7 @@ const ContactFormSection = () => {
         setSubmitStatus(null);
 
         // Using our backend endpoint
-        const endpoint = "/send-application";
+        const endpoint = `${import.meta.env.VITE_API_BASE_URL}/send-application`;
 
         try {
             const formDataToSend = new FormData();

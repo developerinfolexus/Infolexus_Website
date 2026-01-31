@@ -37,7 +37,8 @@ const ApplicationForm = () => {
         setSubmitStatus(null);
 
         // Point to local backend (proxied by Vite)
-        const endpoint = "/send-application";
+        // Use environmental variable for API base URL
+        const endpoint = `${import.meta.env.VITE_API_BASE_URL}/send-application`;
 
         try {
             const formDataToSend = new FormData();

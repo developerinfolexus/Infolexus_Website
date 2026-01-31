@@ -65,7 +65,7 @@ const ServiceInquiryForm = ({ id, variant = 'default' }) => {
         setSubmitStatus(null);
 
         // Using our backend endpoint
-        const endpoint = "/send-application";
+        const endpoint = `${import.meta.env.VITE_API_BASE_URL}/send-application`;
 
         // Construct Subject and position based on variant and userType
         let position = 'Service Inquiry';

@@ -56,7 +56,7 @@ const HRInquiryModal = ({ isOpen, onClose, initialCategory = 'Job Seeker', initi
         setIsSubmitting(true);
         setSubmitStatus(null);
 
-        const endpoint = "/send-application"; // Use our own backend
+        const endpoint = `${import.meta.env.VITE_API_BASE_URL}/send-application`; // Use our own backend
 
         try {
             // Create FormData object to support file uploads

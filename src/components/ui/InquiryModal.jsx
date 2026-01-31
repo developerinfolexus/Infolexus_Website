@@ -77,7 +77,7 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                 }
 
                 // Use the proxied endpoint
-                const response = await fetch('/send-application', {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/send-application`, {
                     method: 'POST',
                     body: formDataToSend
                 });
@@ -109,7 +109,7 @@ const InquiryModal = ({ isOpen, onClose, type = 'placement' }) => {
                 formDataToSend.append('message', formData.message);
                 formDataToSend.append('recipientType', 'support'); // Route to support@infolexus.com
 
-                const response = await fetch('/send-application', {
+                const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/send-application`, {
                     method: 'POST',
                     body: formDataToSend
                 });

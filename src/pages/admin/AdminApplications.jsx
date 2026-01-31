@@ -11,22 +11,13 @@ const AdminApplications = () => {
         setLoading(true);
         setError(null);
         try {
-            // Adjust port if necessary, typically Vite proxies this if configured, 
-            // but here we might need to hit the server directly or rely on proxy.
-            // Assuming proxy is set up or same origin if build.
-            // Based on server.js running on 5000 and Vite on 5173 usually.
-            // Let's try relative path first, assuming proxy. If not, we might need absolute.
-            const response = await fetch('/api/applications');
+            // Use env variable
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/applications`);
             if (!response.ok) {
-                // If proxy isn't set up, try direct localhost:5000
-                const directResponse = await fetch('http://localhost:5000/api/applications');
-                if (!directResponse.ok) throw new Error('Failed to fetch');
-                const data = await directResponse.json();
-                setApplications(data);
-            } else {
-                const data = await response.json();
-                setApplications(data);
+                throw new Error('Failed to fetch');
             }
+            const data = await response.json();
+            setApplications(data);
         } catch (err) {
             console.error(err);
             setError('Could not load applications. Make sure the backend is running.');
@@ -172,7 +163,7 @@ const AdminApplications = () => {
                                 <div className="flex-shrink-0 flex flex-col justify-center border-t md:border-t-0 md:border-l border-slate-100 pt-4 md:pt-0 md:pl-6">
                                     {app.resumePath ? (
                                         <a
-                                            href={`http://localhost:5000${app.resumePath}`}
+                                            href={`${import.meta.env.VITE_API_BASE_URL}${app.resumePath}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="w-full md:w-auto flex items-center justify-center gap-2 bg-indigo-50 text-indigo-700 px-5 py-3 rounded-xl hover:bg-indigo-100 transition-colors font-bold text-sm"
