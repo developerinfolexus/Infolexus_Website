@@ -32,8 +32,12 @@ app.use(express.json());
 import fs from 'fs';
 
 const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
+try {
+    if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir);
+    }
+} catch (err) {
+    console.error('Error creating upload directory:', err);
 }
 
 const storage = multer.diskStorage({
@@ -208,19 +212,20 @@ app.get('/api/applications', (req, res) => {
     }
 });
 
-// Serve React App (Production) - Commented out for local dev stability if needed
-// This strictly serves the build folder for cPanel/Production deployments
-// app.use(express.static(path.join(__dirname, 'dist')));
+// Serve React App (Production)
+// This serves the build folder for cPanel/Production deployments
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Catch-all handler for React Routing
-// app.get('*', (req, res) => {
-//     const indexPath = path.join(__dirname, 'dist', 'index.html');
-//     if (fs.existsSync(indexPath)) {
-//         res.sendFile(indexPath);
-//     } else {
-//         res.status(404).send('Build not found. Please run "npm run build" first.');
-//     }
-// });
+app.get('*', (req, res) => {
+    const indexPath = path.join(__dirname, 'dist', 'index.html');
+    if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+    } else {
+        // If dist doesn't exist, we might be in API-only mode or dev mode
+        res.status(404).send('Build not found. Please run "npm run build" first or check deployment paths.');
+    }
+});
 
 // Global Error Handler
 app.use((err, req, res, next) => {
