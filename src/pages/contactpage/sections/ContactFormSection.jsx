@@ -31,7 +31,6 @@ const ContactFormSection = () => {
             const formDataToSend = new FormData();
             formDataToSend.append('name', formData.name);
             formDataToSend.append('email', formData.email);
-            formDataToSend.append('email', formData.email);
             formDataToSend.append('location', formData.location);
             formDataToSend.append('phone', ''); // Contact form doesn't have phone
             formDataToSend.append('position', 'Contact Us Inquiry');

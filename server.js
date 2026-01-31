@@ -8,6 +8,15 @@ import { fileURLToPath } from 'url';
 
 dotenv.config();
 
+// Prevent crash on unhandled errors
+process.on('uncaughtException', (err) => {
+    console.error('CRITICAL ERROR: Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('CRITICAL ERROR: Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -22,14 +31,14 @@ app.use(express.json());
 // Configure Multer for file uploads (Disk Storage)
 import fs from 'fs';
 
-const uploadDir = 'uploads';
+const uploadDir = path.join(__dirname, 'uploads');
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
 }
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/')
+        cb(null, uploadDir)
     },
     filename: function (req, file, cb) {
         // Sanitize filename to prevent issues
@@ -38,7 +47,10 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 } // Limit file size to 5MB to prevent overflow
+});
 
 // Serve uploaded files statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -61,6 +73,7 @@ const saveApplication = (data) => {
 
 // Application Submission Endpoint
 app.post('/send-application', upload.single('attachment'), async (req, res) => {
+    console.log(`[${new Date().toISOString()}] Received application request`);
     try {
         // Extract common fields, keep the rest in otherFields
         const { name, email, phone, position, message, ...otherFields } = req.body;
@@ -208,6 +221,16 @@ app.get('/api/applications', (req, res) => {
 //         res.status(404).send('Build not found. Please run "npm run build" first.');
 //     }
 // });
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+    console.error('Unhandled Server Error:', err);
+    res.status(500).json({
+        success: false,
+        message: 'Internal Server Error',
+        error: process.env.NODE_ENV === 'production' ? 'An unexpected error occurred' : err.message
+    });
+});
 
 app.listen(PORT, () => {
 

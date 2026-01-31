@@ -47,7 +47,6 @@ const ApplicationForm = () => {
             formDataToSend.append('name', formData.name);
             formDataToSend.append('email', formData.email);
             formDataToSend.append('phone', formData.phone);
-            formDataToSend.append('phone', formData.phone);
             formDataToSend.append('location', formData.location);
             formDataToSend.append('position', formData.position);
             formDataToSend.append('experienceLevel', formData.experienceLevel);
