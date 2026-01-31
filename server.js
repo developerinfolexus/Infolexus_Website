@@ -80,7 +80,7 @@ const saveApplication = (data) => {
 };
 
 // Application Submission Endpoint
-app.post('/send-application', upload.single('attachment'), async (req, res) => {
+app.post('/api/send-application', upload.single('attachment'), async (req, res) => {
     console.log(`[${new Date().toISOString()}] Received application request`);
     try {
         // Extract common fields, keep the rest in otherFields
